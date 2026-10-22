@@ -52,6 +52,7 @@
   /* Fonts */
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   --nav-h: 70px;
 }
 
@@ -351,10 +352,11 @@ img {
 }
 
 .metric-val {
-  font-family: var(--font-heading);
+  font-family: var(--font-mono);
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-main);
+  font-variant-numeric: tabular-nums;
 }
 
 .metric-label {
@@ -437,6 +439,26 @@ img {
 
 .search-clear-cross:hover {
   color: var(--text-main);
+}
+
+.search-kbd {
+  position: absolute;
+  right: 0.85rem;
+  padding: 0.15rem 0.45rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.search-input-field:focus ~ .search-kbd,
+.search-clear-cross.visible ~ .search-kbd {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Fuel Category Chips */
@@ -552,7 +574,7 @@ img {
   background: rgba(239, 68, 68, 0.1);
 }
 
-/* Results header bar */
+/* Results header bar & Active Filter Deck */
 .results-status-bar {
   display: flex;
   align-items: center;
@@ -560,10 +582,64 @@ img {
   margin-bottom: 1.25rem;
   font-size: 0.9rem;
   color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .results-status-bar strong {
   color: var(--text-main);
+  font-family: var(--font-mono);
+}
+
+.active-filters-deck {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-pill);
+  font-size: 0.75rem;
+  color: var(--text-main);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.active-filter-tag:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.active-filter-tag svg {
+  color: var(--text-dim);
+  transition: color 0.15s;
+}
+
+.active-filter-tag:hover svg {
+  color: #ef4444;
+}
+
+.btn-clear-all-tags {
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--r-sm);
+  transition: background 0.15s;
+}
+
+.btn-clear-all-tags:hover {
+  background: rgba(239, 68, 68, 0.1);
 }
 
 /* ==========================================================================
@@ -751,11 +827,12 @@ img {
 }
 
 .price-main-tag {
-  font-family: var(--font-heading);
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--text-main);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .installment-hint {
@@ -1014,12 +1091,14 @@ img {
 }
 
 .sim-installment-figure {
-  font-family: var(--font-heading);
-  font-size: 2.1rem;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
   color: #10b981;
   line-height: 1.1;
   margin-top: 0.35rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .sim-table-rows {

@@ -7,10 +7,10 @@
   <meta name="author" content="Arkaan Taqiyyuddin Ilham Achmad Wijaya" />
   <title>Veloce Auto — Showroom & Katalog Mobil Terverifikasi</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <!-- Google Fonts: Plus Jakarta Sans, Outfit, & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2'/><circle cx='7' cy='17' r='2'/><path d='M9 17h6'/><circle cx='17' cy='17' r='2'/></svg>" />
@@ -135,6 +135,7 @@
               placeholder="Cari mobil berdasarkan nama atau brand (e.g. BYD, Fortuner, Civic)..." 
               autocomplete="off"
             />
+            <kbd class="search-kbd" id="searchKbd" title="Tekan tombol '/' untuk langsung mencari">/</kbd>
             <button class="search-clear-cross" id="searchClearBtn" aria-label="Bersihkan pencarian">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -214,9 +215,10 @@
 
       </div>
 
-      <!-- Status Count Bar -->
+      <!-- Status Count & Active Filters Bar -->
       <div class="results-status-bar">
         <span id="resultsCount">Memuat armada mobil...</span>
+        <div class="active-filters-deck" id="activeFiltersDeck"></div>
       </div>
 
       <!-- Cars Grid (Rendered via API & Pure Vanilla DOM) -->

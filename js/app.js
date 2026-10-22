@@ -216,6 +216,8 @@ class VeloceApp {
       this.resultsCountEl.innerHTML = `Menampilkan <strong>${filtered.length}</strong> dari <strong>${this.allCars.length}</strong> mobil`;
     }
 
+    this.renderActiveFilterDeck();
+
     if (filtered.length === 0) {
       renderEmptyState(this.carsGrid, () => this.resetFilters());
       return;
@@ -228,6 +230,112 @@ class VeloceApp {
       isWishlisted: (id) => this.wishlist.has(id),
       isCompared: (id) => this.comparedIds.has(id)
     });
+  }
+
+  renderActiveFilterDeck() {
+    const deck = document.getElementById('activeFiltersDeck');
+    if (!deck) return;
+    deck.innerHTML = '';
+
+    const tags = [];
+
+    if (this.filterState.keyword && this.filterState.keyword.trim() !== '') {
+      tags.push({
+        label: `Cari: "${this.filterState.keyword}"`,
+        onRemove: () => {
+          this.filterState.keyword = '';
+          if (this.searchInput) this.searchInput.value = '';
+          this.searchClearBtn?.classList.remove('visible');
+          this.render();
+        }
+      });
+    }
+
+    if (this.filterState.fuel && this.filterState.fuel !== 'all') {
+      tags.push({
+        label: `Bahan Bakar: ${this.filterState.fuel.toUpperCase()}`,
+        onRemove: () => {
+          this.filterState.fuel = 'all';
+          this.fuelChips.forEach(chip => chip.classList.toggle('active', chip.dataset.fuel === 'all'));
+          this.render();
+        }
+      });
+    }
+
+    if (this.filterState.brand && this.filterState.brand !== 'all') {
+      tags.push({
+        label: `Brand: ${this.filterState.brand}`,
+        onRemove: () => {
+          this.filterState.brand = 'all';
+          if (this.brandSelect) this.brandSelect.value = 'all';
+          this.render();
+        }
+      });
+    }
+
+    if (this.filterState.transmission && this.filterState.transmission !== 'all') {
+      tags.push({
+        label: `Transmisi: ${this.filterState.transmission}`,
+        onRemove: () => {
+          this.filterState.transmission = 'all';
+          if (this.transSelect) this.transSelect.value = 'all';
+          this.render();
+        }
+      });
+    }
+
+    if (this.filterState.status && this.filterState.status !== 'all') {
+      tags.push({
+        label: `Status: ${this.filterState.status === 'tersedia' ? 'Tersedia' : 'Terjual'}`,
+        onRemove: () => {
+          this.filterState.status = 'all';
+          if (this.statusSelect) this.statusSelect.value = 'all';
+          this.render();
+        }
+      });
+    }
+
+    if (this.filterState.sort && this.filterState.sort !== 'recommended') {
+      const sortNames = {
+        'price-low': 'Harga Termurah',
+        'price-high': 'Harga Termahal',
+        'year-new': 'Tahun Terbaru',
+        'name-az': 'Nama A - Z'
+      };
+      tags.push({
+        label: `Urutan: ${sortNames[this.filterState.sort] || this.filterState.sort}`,
+        onRemove: () => {
+          this.filterState.sort = 'recommended';
+          if (this.sortSelect) this.sortSelect.value = 'recommended';
+          this.render();
+        }
+      });
+    }
+
+    if (tags.length === 0) return;
+
+    tags.forEach(t => {
+      const tagEl = document.createElement('span');
+      tagEl.className = 'active-filter-tag';
+      tagEl.innerHTML = `
+        ${t.label}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      `;
+      tagEl.addEventListener('click', t.onRemove);
+      deck.appendChild(tagEl);
+    });
+
+    if (tags.length > 1) {
+      const clearBtn = document.createElement('button');
+      clearBtn.type = 'button';
+      clearBtn.className = 'btn-clear-all-tags';
+      clearBtn.textContent = 'Hapus Semua';
+      clearBtn.addEventListener('click', () => this.resetFilters());
+      deck.appendChild(clearBtn);
+    }
   }
 
   resetFilters() {
@@ -303,6 +411,25 @@ class VeloceApp {
     const simA = calculateLoan(carA.harga, 20, 36);
     const simB = calculateLoan(carB.harga, 20, 36);
 
+    const priceDiff = Math.abs(carA.harga - carB.harga);
+    const priceDiffFormatted = formatRupiah(priceDiff);
+
+    let priceBadgeA = '';
+    let priceBadgeB = '';
+    if (carA.harga < carB.harga) {
+      priceBadgeA = `<span style="font-size:0.72rem; background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.25); padding:2px 6px; border-radius:4px; font-weight:700; margin-left:6px;">Hemat ${priceDiffFormatted}</span>`;
+    } else if (carB.harga < carA.harga) {
+      priceBadgeB = `<span style="font-size:0.72rem; background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.25); padding:2px 6px; border-radius:4px; font-weight:700; margin-left:6px;">Hemat ${priceDiffFormatted}</span>`;
+    }
+
+    let yearBadgeA = '';
+    let yearBadgeB = '';
+    if (carA.tahun > carB.tahun) {
+      yearBadgeA = `<span style="font-size:0.72rem; background:rgba(37,99,235,0.1); color:#60a5fa; border:1px solid rgba(37,99,235,0.25); padding:2px 6px; border-radius:4px; font-weight:700; margin-left:6px;">+${carA.tahun - carB.tahun} thn lebih muda</span>`;
+    } else if (carB.tahun > carA.tahun) {
+      yearBadgeB = `<span style="font-size:0.72rem; background:rgba(37,99,235,0.1); color:#60a5fa; border:1px solid rgba(37,99,235,0.25); padding:2px 6px; border-radius:4px; font-weight:700; margin-left:6px;">+${carB.tahun - carA.tahun} thn lebih muda</span>`;
+    }
+
     const wrap = document.getElementById('compareColsWrap');
     if (wrap) {
       wrap.innerHTML = `
@@ -311,17 +438,19 @@ class VeloceApp {
           <div>
             <span style="font-size:0.75rem; color:var(--accent-blue-text); font-weight:700;">${carA.brand}</span>
             <h4 style="font-size:1.15rem; color:var(--text-main); margin-top:2px;">${carA.nama}</h4>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem;">${formatRupiah(carA.harga)}</div>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem; font-family:var(--font-mono);">
+              ${formatRupiah(carA.harga)} ${priceBadgeA}
+            </div>
           </div>
           <div>
-            <div class="compare-item-row"><span>Tahun</span><span>${carA.tahun}</span></div>
+            <div class="compare-item-row"><span>Tahun</span><span>${carA.tahun} ${yearBadgeA}</span></div>
             <div class="compare-item-row"><span>Bahan Bakar</span><span>${carA.bahan_bakar}</span></div>
             <div class="compare-item-row"><span>Transmisi</span><span>${carA.transmisi}</span></div>
-            <div class="compare-item-row"><span>Status</span><span style="color:${carA.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carA.status}</span></div>
-            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981;">${formatRupiah(simA.monthlyInstallment)}/bln</span></div>
+            <div class="compare-item-row"><span>Status</span><span style="color:${carA.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carA.status.toUpperCase()}</span></div>
+            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981; font-family:var(--font-mono); font-weight:700;">${formatRupiah(simA.monthlyInstallment)}/bln</span></div>
           </div>
-          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi tentang ${carA.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
-            Tanya Unit Ini
+          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi dan tanya unit ${carA.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
+            Hubungi Sales Unit Ini
           </a>
         </div>
 
@@ -330,17 +459,19 @@ class VeloceApp {
           <div>
             <span style="font-size:0.75rem; color:var(--accent-blue-text); font-weight:700;">${carB.brand}</span>
             <h4 style="font-size:1.15rem; color:var(--text-main); margin-top:2px;">${carB.nama}</h4>
-            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem;">${formatRupiah(carB.harga)}</div>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem; font-family:var(--font-mono);">
+              ${formatRupiah(carB.harga)} ${priceBadgeB}
+            </div>
           </div>
           <div>
-            <div class="compare-item-row"><span>Tahun</span><span>${carB.tahun}</span></div>
+            <div class="compare-item-row"><span>Tahun</span><span>${carB.tahun} ${yearBadgeB}</span></div>
             <div class="compare-item-row"><span>Bahan Bakar</span><span>${carB.bahan_bakar}</span></div>
             <div class="compare-item-row"><span>Transmisi</span><span>${carB.transmisi}</span></div>
-            <div class="compare-item-row"><span>Status</span><span style="color:${carB.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carB.status}</span></div>
-            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981;">${formatRupiah(simB.monthlyInstallment)}/bln</span></div>
+            <div class="compare-item-row"><span>Status</span><span style="color:${carB.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carB.status.toUpperCase()}</span></div>
+            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981; font-family:var(--font-mono); font-weight:700;">${formatRupiah(simB.monthlyInstallment)}/bln</span></div>
           </div>
-          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi tentang ${carB.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
-            Tanya Unit Ini
+          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi dan tanya unit ${carB.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
+            Hubungi Sales Unit Ini
           </a>
         </div>
       `;
@@ -517,8 +648,18 @@ class VeloceApp {
     });
 
     window.addEventListener('keydown', (e) => {
+      // Shortcut '/' to focus search input
+      if (e.key === '/' && document.activeElement !== this.searchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        this.searchInput?.focus();
+        this.searchInput?.select();
+      }
+
       if (e.key === 'Escape') {
         document.querySelectorAll('.modal-layer.active').forEach(m => this.closeModal(m));
+        if (document.activeElement === this.searchInput) {
+          this.searchInput.blur();
+        }
       }
     });
 

@@ -102,7 +102,7 @@ export function renderCars(container, cars, callbacks) {
         />
         <div class="media-badges-overlay">
           <span class="clean-badge ${isAvailable ? 'available' : 'sold'}">
-            <span class="clean-badge-dot"></span>
+            <span class="clean-badge-dot ${isAvailable ? 'pulsing' : ''}"></span>
             ${isAvailable ? 'Tersedia' : 'Terjual'}
           </span>
           <button class="btn-card-fav ${isWishlisted ? 'active' : ''}" type="button" aria-label="Simpan mobil">
@@ -228,12 +228,14 @@ export function showToast(title, message, type = 'info') {
   toast.className = 'toast';
   toast.style = `
     pointer-events: auto;
+    position: relative;
+    overflow: hidden;
     min-width: 280px;
     max-width: 380px;
     background: var(--bg-surface);
     border: 1px solid var(--border-strong);
     border-radius: var(--r-sm);
-    padding: 0.85rem 1rem;
+    padding: 0.85rem 1rem 0.95rem;
     box-shadow: var(--shadow-floating);
     display: flex;
     align-items: flex-start;
@@ -250,6 +252,7 @@ export function showToast(title, message, type = 'info') {
       <div style="font-size:0.88rem; font-weight:700; color:var(--text-main);">${title}</div>
       <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">${message}</div>
     </div>
+    <div class="toast-progress" style="background:${dotColor};"></div>
   `;
 
   container.appendChild(toast);
