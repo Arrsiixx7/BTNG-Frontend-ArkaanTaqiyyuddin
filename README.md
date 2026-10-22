@@ -31,6 +31,7 @@ Seluruh data 12 unit mobil diambil secara langsung (*live*) dari endpoint resmi 
 - Pengguna dapat memilih 2 unit mobil berbeda untuk dibandingkan langsung secara berdampingan.
 - Floating bar interaktif muncul di bawah layar saat mobil dipilih (`1/2` & `2/2 Mobil Terpilih`).
 - Modal komparasi menyajikan perbandingan detail: foto, harga, tahun, bahan bakar, transmisi, status, hingga estimasi cicilan bulanan.
+- **Badge Diferensial Otomatis**: Secara otomatis menghitung dan menandai unit yang lebih hemat (*Hemat Rp...*) dan unit dengan tahun lebih baru (*+X thn lebih muda*).
 
 ### 4. Integrasi WhatsApp Langsung (Direct WhatsApp Inquiry)
 - Tombol WhatsApp pada setiap unit mobil otomatis membuat pesan siap kirim dengan teks spesifik:
@@ -38,6 +39,8 @@ Seluruh data 12 unit mobil diambil secara langsung (*live*) dari endpoint resmi 
 
 ### 5. Pencarian & Filter Cerdas Terpadu
 - **Pencarian Real-Time**: Mencari berdasarkan nama model maupun brand pabrikan.
+- **Pintasan Keyboard (Shortcut)**: Tekan tombol `/` di keyboard untuk langsung melompat ke kotak pencarian, dan `Esc` untuk menutup dialog/modal.
+- **Chips Filter Aktif**: Label indikator filter aktif yang dapat dihapus secara individual atau sekaligus dengan tombol "Hapus Semua".
 - **Chips Bahan Bakar**: Filter instan *Bensin, Diesel, Hybrid, Listrik (EV)* dengan penghitung jumlah unit otomatis.
 - **Multi-Dropdown**: Filter berdasarkan Brand, Transmisi (*Matic, CVT, Manual*), dan Status (*Tersedia, Terjual*).
 - **Pengurutan (Sort)**: Rekomendasi, Harga Termurah/Termahal, Tahun Terbaru, dan Nama Alfabetis.
@@ -46,10 +49,12 @@ Seluruh data 12 unit mobil diambil secara langsung (*live*) dari endpoint resmi 
 - Perhitungan estimasi angsuran per bulan secara real-time.
 - Slider interaktif uang muka (DP) dari 15% hingga 60%.
 - Pilihan tenor fleksibel (12, 24, 36, 48, 60 bulan) dengan suku bunga flat acuan.
+- Format angka tabular monospace (*JetBrains Mono*) untuk presisi pembacaan finansial.
 
 ### 7. Garasi Favorit (Wishlist) & Test Drive Form
 - Tandai mobil favorit dengan tombol hati (tersimpan di `localStorage`).
 - Formulir booking test drive dengan validasi otomatis (mencegah pemilihan tanggal lampau).
+- Notifikasi toast dinamis dengan animasi progress bar waktu tersisa.
 
 ---
 
