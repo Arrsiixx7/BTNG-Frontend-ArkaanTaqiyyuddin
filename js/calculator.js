@@ -96,7 +96,7 @@ export function initCalculator(cars) {
   dpRange.addEventListener('input', update);
 
   if (tenorContainer) {
-    const buttons = tenorContainer.querySelectorAll('.tenor-btn');
+    const buttons = tenorContainer.querySelectorAll('.tenor-choice-btn, .tenor-btn');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));

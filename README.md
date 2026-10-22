@@ -1,4 +1,4 @@
-# 🏎️ VELOCE AUTO — Showroom & E-Commerce Mobil Premium
+# 🏎️ VELOCE AUTO — Showroom & E-Commerce Mobil Terverifikasi
 > **Tugas Akhir BTNG Kelas Frontend — DNCC UDINUS 2026**  
 > Dibuat oleh: **Arkaan Taqiyyuddin Ilham Achmad Wijaya**  
 > Repository: `BTNG-Frontend-ArkaanTaqiyyuddin`
@@ -7,54 +7,49 @@
 
 ## 🌟 Gambaran Umum Proyek
 
-**VELOCE AUTO** adalah platform website E-Commerce & Showroom Mobil mewah yang dibangun menggunakan **HTML5, CSS3 murni, dan Vanilla JavaScript (Native)** tanpa ketergantungan pada library atau framework JavaScript eksternal (seperti React, Vue, jQuery, atau Bootstrap).
+**VELOCE AUTO** adalah platform katalog & showroom mobil yang dirancang dengan pendekatan **Human-Centered UI/UX (Zero AI Slop)** dan dibangun menggunakan **HTML5 semantik, CSS3 murni, dan Vanilla JavaScript (Native ES6 Modules)** tanpa library atau framework tambahan.
 
-Fokus utama pengembangan adalah **kualitas tampilan visual (UI)**, **kenyamanan interaksi pengguna (UX)**, **animasi halus (*smooth transitions & micro-interactions*)**, **responsivitas penuh (*mobile-first*)**, serta **integrasi API dinamis** menggunakan DOM manipulation.
+Seluruh data 12 unit mobil diambil secara langsung (*live*) dari endpoint resmi panitia BTNG DNCC Udinus menggunakan fungsi `fetch()` dan diproses ke dalam tampilan visual interaktif menggunakan manipulasi DOM murni.
 
 ---
 
-## ✨ Fitur-Fitur Unggulan
+## ✨ Fitur-Fitur & Peningkatan Desain UI/UX
 
-### 1. Integrasi API Resmi & DOM Manipulation Dinamis
+### 1. Desain Human-Crafted (Tanpa Elemen Generik AI)
+- **Visual Bersih & Berkontras Tinggi**: Menggunakan palet *Deep Asphalt* (Dark Mode) dan *Crisp Platinum Studio* (Light Mode) dengan border 1px yang tegas dan bayangan halus alami.
+- **Tipografi Proporsional**: Kombinasi Google Fonts *Outfit* (heading) dan *Plus Jakarta Sans* (body text) yang nyaman dibaca.
+- **Dark / Light Mode**: Tersimpan secara persisten di `localStorage` peramban.
+
+### 2. Integrasi API Resmi & DOM Manipulation Dinamis
 - **Endpoint**: `https://api-web.dnccudinus.org/api/mobil`
-- Pengambilan data asynchronous menggunakan fungsi native `fetch()` dengan penanganan error (*try-catch*) dan abort timeout.
-- Render elemen kartu mobil secara dinamis melalui DOM manipulation (`createElement()`, `appendChild()`, `classList`).
-- **Zero CLS Shimmer Loading**: Skeleton loading beranimasi saat proses fetch data berlangsung.
-- **State Handling**: State Kosong (*Empty State*) dan State Gangguan (*Error State*) dilengkapi tombol *Muat Ulang / Reset Filter*.
+- Pengambilan data asynchronous menggunakan fungsi `fetch()` dengan penanganan error (*try-catch*) dan abort timeout.
+- Render elemen kartu mobil secara dinamis menggunakan manipulasi DOM murni (`createElement()`, `appendChild()`, `classList`).
+- **Shimmer Skeleton Loading**: State transisi pemuatan data tanpa *Cumulative Layout Shift (CLS)*.
+- **Empty State & Error State**: Tampilan informatif ketika filter tidak menemukan hasil atau terjadi kendala jaringan.
 
-### 2. Sistem Pencarian, Filter & Pengurutan Instan (Real-time)
-- **Live Search**: Pencarian cepat berdasarkan nama mobil maupun brand pabrikan secara real-time disertai tombol *Clear*.
-- **Pills Filter Bahan Bakar**: Filter kategori (*Bensin, Diesel, Hybrid, Listrik/EV*) lengkap dengan badge jumlah unit dinamis yang dihitung dari API.
-- **Multi-Dropdown Filter**: Filter lanjutan berdasarkan Brand, Tipe Transmisi (*Matic, CVT, Manual*), dan Status Ketersediaan (*Tersedia / Terjual*).
-- **Pengurutan Fleksibel (Sorting)**:
-  - Rekomendasi (Unit tersedia & terpopuler di atas)
-  - Harga Terendah → Tertinggi
-  - Harga Tertinggi → Terendah
-  - Tahun Rilis Terbaru
-  - Nama Alfabetis (A - Z)
+### 3. Komparasi Head-to-Head (Fitur Bandingkan 2 Mobil)
+- Pengguna dapat memilih 2 unit mobil berbeda untuk dibandingkan langsung secara berdampingan.
+- Floating bar interaktif muncul di bawah layar saat mobil dipilih (`1/2` & `2/2 Mobil Terpilih`).
+- Modal komparasi menyajikan perbandingan detail: foto, harga, tahun, bahan bakar, transmisi, status, hingga estimasi cicilan bulanan.
 
-### 3. Kalkulator Simulasi Kredit Interaktif
-- Perhitungan otomatis estimasi cicilan per bulan secara real-time.
-- Slider interaktif uang muka (*Down Payment / DP*) dari 15% hingga 60%.
-- Pilihan tenor fleksibel (12, 24, 36, 48, hingga 60 bulan) dengan suku bunga flat transparan.
-- Rincian biaya: Total DP, Pokok Pembiayaan, Suku Bunga, dan Total Pengeluaran.
+### 4. Integrasi WhatsApp Langsung (Direct WhatsApp Inquiry)
+- Tombol WhatsApp pada setiap unit mobil otomatis membuat pesan siap kirim dengan teks spesifik:
+  > *"Halo Veloce Auto, saya ingin tanya ketersediaan unit [Brand] [Nama Mobil] (Tahun [Tahun], Harga [Harga]). Apakah unit ini masih tersedia untuk test drive?"*
 
-### 4. Detail Unit Mobil & Booking Test Drive
-- Modal pop-up dengan efek *backdrop blur glassmorphism*.
-- Foto resolusi tinggi, spesifikasi lengkap, garansi mesin, dan kalkulasi angsuran instan.
-- Formulir pendaftaran jadwal *Test Drive* interaktif dengan validasi tanggal (otomatis mencegah tanggal masa lalu) dan umpan balik visual (*toast alert*).
+### 5. Pencarian & Filter Cerdas Terpadu
+- **Pencarian Real-Time**: Mencari berdasarkan nama model maupun brand pabrikan.
+- **Chips Bahan Bakar**: Filter instan *Bensin, Diesel, Hybrid, Listrik (EV)* dengan penghitung jumlah unit otomatis.
+- **Multi-Dropdown**: Filter berdasarkan Brand, Transmisi (*Matic, CVT, Manual*), dan Status (*Tersedia, Terjual*).
+- **Pengurutan (Sort)**: Rekomendasi, Harga Termurah/Termahal, Tahun Terbaru, dan Nama Alfabetis.
 
-### 5. Garasi Favorit (Wishlist) & LocalStorage
-- Pengguna dapat menandai mobil impian mereka dengan tombol hati (*heart pop micro-animation*).
-- Data favorit tersimpan otomatis dan persisten di `localStorage` peramban.
-- Drawer khusus untuk meninjau dan menghapus mobil yang disimpan.
+### 6. Kalkulator Simulasi Kredit Interaktif
+- Perhitungan estimasi angsuran per bulan secara real-time.
+- Slider interaktif uang muka (DP) dari 15% hingga 60%.
+- Pilihan tenor fleksibel (12, 24, 36, 48, 60 bulan) dengan suku bunga flat acuan.
 
-### 6. Desain UI/UX & Animasi Halus (*Smooth Animations*)
-- **Dark & Light Mode Switcher**: Mendukung mode Gelap (Obsidian Luxury) dan mode Terang (Platinum Minimalist) dengan penyimpanan state di `localStorage`.
-- **Glassmorphism Design System**: Efek kaca modern dengan backdrop blur halus pada navbar, kartu, dan modal.
-- **Micro-Interactions**: Hover 3D tilt pada kartu mobil, ripple pada tombol, badge pulse pada status "Tersedia", dan rotasi akordeon FAQ.
-- **Toast Notifications**: Notifikasi pop-up cerdas di sudut layar dengan animasi slide-in & auto-dismiss.
-- **Scroll Spy Navbar**: Indikator link menu otomatis aktif sesuai posisi section halaman yang sedang dibaca.
+### 7. Garasi Favorit (Wishlist) & Test Drive Form
+- Tandai mobil favorit dengan tombol hati (tersimpan di `localStorage`).
+- Formulir booking test drive dengan validasi otomatis (mencegah pemilihan tanggal lampau).
 
 ---
 
@@ -62,17 +57,17 @@ Fokus utama pengembangan adalah **kualitas tampilan visual (UI)**, **kenyamanan 
 
 ```text
 BTNG-Frontend-ArkaanTaqiyyuddin/
-├── index.html              # Halaman utama semantik (HTML5)
+├── index.html              # Halaman utama berstruktur semantik
 ├── css/
-│   ├── style.css           # Styling dasar, layout, tema (dark/light), typography
-│   ├── animations.css      # Keyframes animasi (shimmer, fadeInUp, toast, modal)
-│   └── responsive.css      # Media queries khusus (mobile, tablet, desktop)
+│   ├── style.css           # Sistem desain human-crafted, tokens, dark/light theme
+│   ├── animations.css      # Animasi halus (shimmer, fadeUp, modal, toast)
+│   └── responsive.css      # Breakpoints responsif mobile, tablet, dan desktop
 ├── js/
-│   ├── api.js              # Modul fetch API resmi DNCC
-│   ├── dom.js              # DOM manipulation (render card, skeleton, toast, modal)
-│   ├── filters.js          # Logika filter, keyword search, & sorting
+│   ├── api.js              # Fetch data dari endpoint resmi DNCC
+│   ├── dom.js              # DOM manipulation untuk card, skeleton, modal, & toast
+│   ├── filters.js          # Logika pencarian, filter, & sorting
 │   ├── calculator.js       # Logika perhitungan simulasi kredit
-│   └── app.js              # Controller utama & inisialisasi aplikasi
+│   └── app.js              # Controller utama aplikasi, compare, & event listeners
 └── README.md               # Dokumentasi lengkap proyek
 ```
 
@@ -80,37 +75,17 @@ BTNG-Frontend-ArkaanTaqiyyuddin/
 
 ## 🚀 Cara Menjalankan Website
 
-Proyek ini tidak memerlukan kompilasi atau dependensi npm/node khusus karena berbasis **Pure Vanilla Web Technologies (ES6 Modules)**.
+Proyek ini berbasis **Pure Vanilla Web Technologies (ES6 Modules)** sehingga tidak membutuhkan langkah build/kompilasi.
 
-### Metode 1: Menggunakan Live Server (VS Code)
-1. Buka folder proyek ini di **Visual Studio Code**.
-2. Pasang ekstensi **Live Server** (Ritwick Dey).
-3. Klik kanan pada file `index.html` dan pilih **Open with Live Server**.
-4. Website akan terbuka otomatis di peramban Anda (biasanya `http://127.0.0.1:5500/`).
-
-### Metode 2: Menggunakan Python Web Server (Terminal / Bash)
-Buka terminal di dalam folder proyek, lalu jalankan:
+### Metode 1: Python Web Server
 ```bash
+cd /home/arr_sixx/Projects/BTNG-Frontend-ArkaanTaqiyyuddin
 python3 -m http.server 8000
 ```
-Buka peramban dan akses alamat `http://localhost:8000`.
+Buka peramban di: `http://localhost:8000`
 
-### Metode 3: Menggunakan PHP Built-in Server
-```bash
-php -S localhost:8000
-```
-Buka peramban dan akses alamat `http://localhost:8000`.
-
----
-
-## 📊 Pemenuhan Rubrik Penilaian Tugas Akhir
-
-| No | Aspek Penilaian | Bobot | Implementasi di Proyek Veloce Auto |
-|:--:|:---|:---:|:---|
-| 1 | **Tampilan dan UI/UX** | **40%** | Desain bertema *Automotive Luxury Glassmorphism*, hierarki tipografi *Outfit & Plus Jakarta Sans*, sistem warna konsisten, Dark/Light Mode, layout teratur, micro-animations, dan toast notifications. |
-| 2 | **Integrasi API & DOM Manipulation** | **30%** | Pengambilan data langsung dari endpoint `https://api-web.dnccudinus.org/api/mobil` menggunakan `fetch()`. DOM manipulation murni (`createElement`, `innerHTML`, `appendChild`), penanganan state loading skeleton, filter dinamis, dan kalkulator interaktif. |
-| 3 | **Responsivitas Website** | **20%** | Tampilan fleksibel dan proporsional di seluruh resolusi: Mobile Smartphone (< 640px) dengan menu drawer, Tablet (768px - 1024px), hingga Desktop layar lebar. |
-| 4 | **Kerapian Kode** | **10%** | Struktur modular terpisah (`api.js`, `dom.js`, `filters.js`, `calculator.js`, `app.js`), semantic tags HTML5 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`), CSS Variables terpusat, clean code tanpa error sintaks pada console. |
+### Metode 2: VS Code Live Server
+Buka folder di VS Code, klik kanan `index.html`, lalu pilih **Open with Live Server**.
 
 ---
 
@@ -118,6 +93,6 @@ Buka peramban dan akses alamat `http://localhost:8000`.
 
 - **Nama Lengkap**: Arkaan Taqiyyuddin Ilham Achmad Wijaya
 - **Username GitHub**: [Arrsiixx7](https://github.com/Arrsiixx7)
-- **Pelatihan**: BTNG (Bina Talenta Next Gen) Kelas Frontend
+- **Kelas**: BTNG (Bina Talenta Next Gen) Kelas Frontend
 - **Penyelenggara**: DNCC (Dian Nuswantoro Computer Club) Universitas Dian Nuswantoro
 - **Tahun**: 2026

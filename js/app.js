@@ -1,7 +1,7 @@
 /**
  * ==========================================================================
- * VELOCE AUTO - MAIN APPLICATION ORCHESTRATOR
- * Vanilla JS App Controller
+ * VELOCE AUTO — MAIN APPLICATION CONTROLLER (Vanilla JS)
+ * High-performance state management, event orchestration, and comparisons
  * ==========================================================================
  */
 
@@ -26,6 +26,7 @@ class VeloceApp {
     this.allCars = [];
     this.filterState = { ...initialFilterState };
     this.wishlist = new Set();
+    this.comparedIds = new Set();
 
     // DOM Elements
     this.carsGrid = document.getElementById('carsGrid');
@@ -37,16 +38,21 @@ class VeloceApp {
     this.transSelect = document.getElementById('transmissionSelect');
     this.statusSelect = document.getElementById('statusSelect');
     this.resetBtn = document.getElementById('resetFiltersBtn');
-    this.fuelPills = document.querySelectorAll('.filter-pill');
+    this.fuelChips = document.querySelectorAll('.chip-btn');
     this.themeToggleBtn = document.getElementById('themeToggleBtn');
-    this.menuToggleBtn = document.getElementById('menuToggleBtn');
+    this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
     this.navMenu = document.getElementById('navMenu');
     this.wishlistBtn = document.getElementById('wishlistBtn');
-    this.wishlistBadge = document.getElementById('wishlistCount');
+    this.wishlistBadge = document.getElementById('wishlistBadge');
 
-    // Modals
+    // Modals & Floating Bars
     this.carModal = document.getElementById('carDetailModal');
     this.wishlistModal = document.getElementById('wishlistModal');
+    this.compareModal = document.getElementById('compareModal');
+    this.compareBar = document.getElementById('floatingCompareBar');
+    this.compareCountText = document.getElementById('compareCountText');
+    this.compareLaunchBtn = document.getElementById('btnLaunchCompare');
+    this.compareClearBtn = document.getElementById('btnClearCompare');
 
     this.init();
   }
@@ -55,30 +61,29 @@ class VeloceApp {
     this.initTheme();
     this.loadWishlist();
     this.bindEvents();
-    await this.fetchAndRenderCars();
+    await this.fetchData();
   }
 
-  /* ---------------- Theme & Storage ---------------- */
+  /* ---------------- Theme & Persistence ---------------- */
   initTheme() {
-    const savedTheme = localStorage.getItem('veloce_theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    this.updateThemeIcon(savedTheme);
+    const saved = localStorage.getItem('veloce_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    this.updateThemeIcon(saved);
   }
 
   toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('veloce_theme', nextTheme);
-    this.updateThemeIcon(nextTheme);
-    showToast('Tema Diubah', `Tampilan beralih ke mode ${nextTheme === 'dark' ? 'Gelap (Dark)' : 'Terang (Light)'}`, 'info');
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('veloce_theme', next);
+    this.updateThemeIcon(next);
   }
 
   updateThemeIcon(theme) {
     if (!this.themeToggleBtn) return;
     const isDark = theme === 'dark';
     this.themeToggleBtn.innerHTML = isDark ? `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -90,35 +95,32 @@ class VeloceApp {
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>
     ` : `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     `;
-    this.themeToggleBtn.setAttribute('title', isDark ? 'Beralih ke Mode Terang' : 'Beralih ke Mode Gelap');
   }
 
   loadWishlist() {
     try {
       const stored = localStorage.getItem('veloce_wishlist');
-      if (stored) {
-        this.wishlist = new Set(JSON.parse(stored));
-      }
+      if (stored) this.wishlist = new Set(JSON.parse(stored));
     } catch (e) {
-      console.warn('Could not read wishlist from localStorage', e);
+      console.warn('LocalStorage access warning:', e);
     }
-    this.updateWishlistBadge();
+    this.updateWishlistCount();
   }
 
   saveWishlist() {
     try {
       localStorage.setItem('veloce_wishlist', JSON.stringify([...this.wishlist]));
     } catch (e) {
-      console.warn('Could not save wishlist to localStorage', e);
+      console.warn('LocalStorage access warning:', e);
     }
-    this.updateWishlistBadge();
+    this.updateWishlistCount();
   }
 
-  updateWishlistBadge() {
+  updateWishlistCount() {
     if (this.wishlistBadge) {
       const count = this.wishlist.size;
       this.wishlistBadge.textContent = count;
@@ -126,68 +128,52 @@ class VeloceApp {
     }
   }
 
-  toggleWishlistCar(car, btnElement) {
-    const isSaved = this.wishlist.has(car.id);
-    if (isSaved) {
+  toggleWishlist(car, btnEl) {
+    if (this.wishlist.has(car.id)) {
       this.wishlist.delete(car.id);
-      if (btnElement) {
-        btnElement.classList.remove('active');
-        btnElement.querySelector('svg').setAttribute('fill', 'none');
+      if (btnEl) {
+        btnEl.classList.remove('active');
+        btnEl.querySelector('svg')?.setAttribute('fill', 'none');
       }
-      showToast('Dihapus dari Garasi', `${car.nama} dihapus dari daftar favorit.`, 'info');
+      showToast('Favorit', `${car.nama} dihapus dari daftar favorit.`, 'info');
     } else {
       this.wishlist.add(car.id);
-      if (btnElement) {
-        btnElement.classList.add('active');
-        btnElement.classList.add('heart-pop');
-        btnElement.querySelector('svg').setAttribute('fill', '#ef4444');
-        setTimeout(() => btnElement.classList.remove('heart-pop'), 450);
+      if (btnEl) {
+        btnEl.classList.add('active');
+        btnEl.classList.add('heart-pop');
+        btnEl.querySelector('svg')?.setAttribute('fill', '#ef4444');
+        setTimeout(() => btnEl.classList.remove('heart-pop'), 350);
       }
-      showToast('Disimpan ke Garasi Favorit!', `${car.nama} berhasil ditambahkan ke garasi impian Anda.`, 'success');
+      showToast('Disimpan', `${car.nama} ditambahkan ke favorit.`, 'success');
     }
     this.saveWishlist();
   }
 
-  /* ---------------- Data Fetching ---------------- */
-  async fetchAndRenderCars() {
+  /* ---------------- Data Ingestion ---------------- */
+  async fetchData() {
     renderSkeletons(this.carsGrid, 6);
 
     try {
-      const response = await getCars();
-      if (!response.data || !Array.isArray(response.data)) {
+      const res = await getCars();
+      if (!res.data || !Array.isArray(res.data)) {
         throw new Error('Format data tidak sesuai.');
       }
 
-      this.allCars = response.data;
-
-      // Update brand dropdown
-      this.populateBrandDropdown();
-
-      // Update statistics
-      this.updateStatisticsDisplay();
-
-      // Setup Calculator
+      this.allCars = res.data;
+      this.populateBrands();
+      this.updateCounters();
       initCalculator(this.allCars);
+      this.render();
 
-      // Render car catalog
-      this.applyFilterAndRender();
-
-      // Show welcome toast
-      setTimeout(() => {
-        showToast('Koneksi API Berhasil', `Berhasil memuat ${this.allCars.length} koleksi mobil resmi BTNG.`, 'success');
-      }, 600);
-
-    } catch (error) {
-      console.error('Fetch error:', error);
-      renderErrorState(this.carsGrid, error.message, () => this.fetchAndRenderCars());
+    } catch (err) {
+      console.error('Fetch error:', err);
+      renderErrorState(this.carsGrid, err.message, () => this.fetchData());
     }
   }
 
-  populateBrandDropdown() {
+  populateBrands() {
     if (!this.brandSelect) return;
     const brands = [...new Set(this.allCars.map(c => c.brand))].sort();
-    
-    // Keep first option "Semua Brand"
     this.brandSelect.innerHTML = '<option value="all">Semua Brand</option>';
     brands.forEach(b => {
       const opt = document.createElement('option');
@@ -197,36 +183,35 @@ class VeloceApp {
     });
   }
 
-  updateStatisticsDisplay() {
+  updateCounters() {
     const stats = getCarStatistics(this.allCars);
 
-    const totalEl = document.getElementById('heroStatTotal');
-    const availEl = document.getElementById('heroStatAvail');
-    const brandsEl = document.getElementById('heroStatBrands');
+    const totalEl = document.getElementById('metaTotalUnits');
+    const availEl = document.getElementById('metaAvailUnits');
+    const brandsEl = document.getElementById('metaBrandsCount');
 
     if (totalEl) totalEl.textContent = stats.total;
     if (availEl) availEl.textContent = stats.available;
-    if (brandsEl) brandsEl.textContent = `${stats.uniqueBrands}+`;
+    if (brandsEl) brandsEl.textContent = stats.uniqueBrands;
 
-    // Update fuel pill badges
-    const pillAll = document.querySelector('[data-fuel="all"] .pill-count');
-    const pillBensin = document.querySelector('[data-fuel="bensin"] .pill-count');
-    const pillDiesel = document.querySelector('[data-fuel="diesel"] .pill-count');
-    const pillHybrid = document.querySelector('[data-fuel="hybrid"] .pill-count');
-    const pillListrik = document.querySelector('[data-fuel="listrik"] .pill-count');
+    // Fuel pill counts
+    const pillAll = document.querySelector('[data-fuel="all"] .chip-count');
+    const pillBensin = document.querySelector('[data-fuel="bensin"] .chip-count');
+    const pillDiesel = document.querySelector('[data-fuel="diesel"] .chip-count');
+    const pillHybrid = document.querySelector('[data-fuel="hybrid"] .chip-count');
+    const pillListrik = document.querySelector('[data-fuel="listrik"] .chip-count');
 
-    if (pillAll) pillAll.textContent = stats.total;
-    if (pillBensin) pillBensin.textContent = stats.fuelCounts.bensin;
-    if (pillDiesel) pillDiesel.textContent = stats.fuelCounts.diesel;
-    if (pillHybrid) pillHybrid.textContent = stats.fuelCounts.hybrid;
-    if (pillListrik) pillListrik.textContent = stats.fuelCounts.listrik;
+    if (pillAll) pillAll.textContent = `(${stats.total})`;
+    if (pillBensin) pillBensin.textContent = `(${stats.fuelCounts.bensin})`;
+    if (pillDiesel) pillDiesel.textContent = `(${stats.fuelCounts.diesel})`;
+    if (pillHybrid) pillHybrid.textContent = `(${stats.fuelCounts.hybrid})`;
+    if (pillListrik) pillListrik.textContent = `(${stats.fuelCounts.listrik})`;
   }
 
-  /* ---------------- Filtering & Render ---------------- */
-  applyFilterAndRender() {
+  /* ---------------- Render & Filters ---------------- */
+  render() {
     const filtered = filterAndSortCars(this.allCars, this.filterState);
 
-    // Update result count display
     if (this.resultsCountEl) {
       this.resultsCountEl.innerHTML = `Menampilkan <strong>${filtered.length}</strong> dari <strong>${this.allCars.length}</strong> mobil`;
     }
@@ -237,10 +222,11 @@ class VeloceApp {
     }
 
     renderCars(this.carsGrid, filtered, {
-      onDetailClick: (car) => this.openCarModal(car),
-      onTestDriveClick: (car) => this.openCarModal(car, true),
-      onWishlistToggle: (car, btn) => this.toggleWishlistCar(car, btn),
-      isWishlisted: (id) => this.wishlist.has(id)
+      onDetail: (car) => this.openDetailModal(car),
+      onToggleWishlist: (car, btn) => this.toggleWishlist(car, btn),
+      onToggleCompare: (car) => this.toggleCompareCar(car),
+      isWishlisted: (id) => this.wishlist.has(id),
+      isCompared: (id) => this.comparedIds.has(id)
     });
   }
 
@@ -249,72 +235,201 @@ class VeloceApp {
 
     if (this.searchInput) {
       this.searchInput.value = '';
-      if (this.searchClearBtn) this.searchClearBtn.classList.remove('visible');
+      this.searchClearBtn?.classList.remove('visible');
     }
-
     if (this.sortSelect) this.sortSelect.value = 'recommended';
     if (this.brandSelect) this.brandSelect.value = 'all';
     if (this.transSelect) this.transSelect.value = 'all';
     if (this.statusSelect) this.statusSelect.value = 'all';
 
-    this.fuelPills.forEach(pill => {
-      pill.classList.toggle('active', pill.dataset.fuel === 'all');
+    this.fuelChips.forEach(chip => {
+      chip.classList.toggle('active', chip.dataset.fuel === 'all');
     });
 
-    this.applyFilterAndRender();
-    showToast('Filter Direset', 'Semua kriteria filter telah dikembalikan ke awal.', 'info');
+    this.render();
+    showToast('Filter Direset', 'Kriteria pencarian telah dikembalikan ke awal.', 'info');
   }
 
-  /* ---------------- Modal Handlers ---------------- */
-  openCarModal(car, scrollToBooking = false) {
+  /* ---------------- Compare Functionality ---------------- */
+  toggleCompareCar(car) {
+    if (this.comparedIds.has(car.id)) {
+      this.comparedIds.delete(car.id);
+      showToast('Perbandingan', `${car.nama} dibatalkan dari perbandingan.`, 'info');
+    } else {
+      if (this.comparedIds.size >= 2) {
+        showToast('Batas Perbandingan', 'Maksimal 2 mobil dapat dibandingkan sekaligus. Hapus salah satu unit terlebih dahulu.', 'warning');
+        return;
+      }
+      this.comparedIds.add(car.id);
+      showToast('Perbandingan', `${car.nama} ditambahkan untuk dibandingkan.`, 'success');
+    }
+    this.updateCompareBar();
+    this.render(); // Update compare button state on cards
+  }
+
+  updateCompareBar() {
+    const count = this.comparedIds.size;
+    if (!this.compareBar) return;
+
+    if (count > 0) {
+      this.compareBar.classList.add('visible');
+      if (this.compareCountText) {
+        this.compareCountText.textContent = `${count}/2 Mobil Terpilih`;
+      }
+      if (this.compareLaunchBtn) {
+        this.compareLaunchBtn.textContent = count === 2 ? 'Bandingkan Sekarang' : 'Pilih 1 Mobil Lagi';
+        this.compareLaunchBtn.disabled = count < 2;
+        this.compareLaunchBtn.style.opacity = count === 2 ? '1' : '0.65';
+      }
+    } else {
+      this.compareBar.classList.remove('visible');
+    }
+  }
+
+  clearCompare() {
+    this.comparedIds.clear();
+    this.updateCompareBar();
+    this.render();
+    showToast('Perbandingan Dikosongkan', 'Pilihan unit perbandingan telah dibersihkan.', 'info');
+  }
+
+  openCompareModal() {
+    if (this.comparedIds.size < 2 || !this.compareModal) return;
+
+    const cars = this.allCars.filter(c => this.comparedIds.has(c.id));
+    if (cars.length < 2) return;
+
+    const [carA, carB] = cars;
+    const simA = calculateLoan(carA.harga, 20, 36);
+    const simB = calculateLoan(carB.harga, 20, 36);
+
+    const wrap = document.getElementById('compareColsWrap');
+    if (wrap) {
+      wrap.innerHTML = `
+        <div class="compare-card-col">
+          <img src="${carA.foto}" alt="${carA.nama}" style="width:100%; height:180px; object-fit:cover; border-radius:var(--r-sm);">
+          <div>
+            <span style="font-size:0.75rem; color:var(--accent-blue-text); font-weight:700;">${carA.brand}</span>
+            <h4 style="font-size:1.15rem; color:var(--text-main); margin-top:2px;">${carA.nama}</h4>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem;">${formatRupiah(carA.harga)}</div>
+          </div>
+          <div>
+            <div class="compare-item-row"><span>Tahun</span><span>${carA.tahun}</span></div>
+            <div class="compare-item-row"><span>Bahan Bakar</span><span>${carA.bahan_bakar}</span></div>
+            <div class="compare-item-row"><span>Transmisi</span><span>${carA.transmisi}</span></div>
+            <div class="compare-item-row"><span>Status</span><span style="color:${carA.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carA.status}</span></div>
+            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981;">${formatRupiah(simA.monthlyInstallment)}/bln</span></div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi tentang ${carA.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
+            Tanya Unit Ini
+          </a>
+        </div>
+
+        <div class="compare-card-col">
+          <img src="${carB.foto}" alt="${carB.nama}" style="width:100%; height:180px; object-fit:cover; border-radius:var(--r-sm);">
+          <div>
+            <span style="font-size:0.75rem; color:var(--accent-blue-text); font-weight:700;">${carB.brand}</span>
+            <h4 style="font-size:1.15rem; color:var(--text-main); margin-top:2px;">${carB.nama}</h4>
+            <div style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-top:0.35rem;">${formatRupiah(carB.harga)}</div>
+          </div>
+          <div>
+            <div class="compare-item-row"><span>Tahun</span><span>${carB.tahun}</span></div>
+            <div class="compare-item-row"><span>Bahan Bakar</span><span>${carB.bahan_bakar}</span></div>
+            <div class="compare-item-row"><span>Transmisi</span><span>${carB.transmisi}</span></div>
+            <div class="compare-item-row"><span>Status</span><span style="color:${carB.status === 'tersedia' ? '#10b981':'#ef4444'}; font-weight:700;">${carB.status}</span></div>
+            <div class="compare-item-row"><span>Est. Cicilan (36 Bln)</span><span style="color:#10b981;">${formatRupiah(simB.monthlyInstallment)}/bln</span></div>
+          </div>
+          <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Veloce Auto, saya ingin konsultasi tentang ${carB.nama}`)}" target="_blank" class="btn-chat-wa" style="width:100%; height:40px;">
+            Tanya Unit Ini
+          </a>
+        </div>
+      `;
+    }
+
+    this.compareModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* ---------------- Modals ---------------- */
+  openDetailModal(car) {
     if (!this.carModal) return;
 
-    const imgEl = this.carModal.querySelector('#modalCarImg');
-    const titleEl = this.carModal.querySelector('#modalCarTitle');
-    const brandEl = this.carModal.querySelector('#modalCarBrand');
-    const yearEl = this.carModal.querySelector('#modalCarYear');
-    const fuelEl = this.carModal.querySelector('#modalCarFuel');
-    const transEl = this.carModal.querySelector('#modalCarTrans');
-    const priceEl = this.carModal.querySelector('#modalCarPrice');
-    const statusBadge = this.carModal.querySelector('#modalCarStatus');
-    const bookCarInput = this.carModal.querySelector('#bookingCarName');
+    const imgEl = document.getElementById('detailModalImg');
+    const brandEl = document.getElementById('detailModalBrand');
+    const nameEl = document.getElementById('detailModalName');
+    const priceEl = document.getElementById('detailModalPrice');
+    const statusEl = document.getElementById('detailModalStatus');
+    const yearEl = document.getElementById('detailModalYear');
+    const fuelEl = document.getElementById('detailModalFuel');
+    const transEl = document.getElementById('detailModalTrans');
+    const calcEl = document.getElementById('detailModalCalc');
+    const bookingInput = document.getElementById('bookingCarTarget');
 
     if (imgEl) imgEl.src = car.foto;
-    if (titleEl) titleEl.textContent = car.nama;
     if (brandEl) brandEl.textContent = car.brand;
+    if (nameEl) nameEl.textContent = car.nama;
+    if (priceEl) priceEl.textContent = formatRupiah(car.harga);
     if (yearEl) yearEl.textContent = car.tahun;
     if (fuelEl) fuelEl.textContent = car.bahan_bakar;
     if (transEl) transEl.textContent = car.transmisi;
-    if (priceEl) priceEl.textContent = formatRupiah(car.harga);
+    if (bookingInput) bookingInput.value = `${car.brand} ${car.nama} (${car.tahun})`;
 
     const isAvailable = car.status.toLowerCase() === 'tersedia';
-    if (statusBadge) {
-      statusBadge.className = `status-badge ${isAvailable ? 'tersedia' : 'sold'}`;
-      statusBadge.innerHTML = `<span class="status-dot"></span>${isAvailable ? 'Unit Tersedia' : 'Sudah Terjual'}`;
+    if (statusEl) {
+      statusEl.className = `clean-badge ${isAvailable ? 'available' : 'sold'}`;
+      statusEl.textContent = isAvailable ? 'Unit Tersedia' : 'Sudah Terjual';
     }
 
-    if (bookCarInput) {
-      bookCarInput.value = `${car.brand} ${car.nama} (${car.tahun})`;
-    }
-
-    // Modal quick simulation calculation
-    const modalMonthly = this.carModal.querySelector('#modalCalcMonthly');
-    if (modalMonthly) {
+    if (calcEl) {
       const sim = calculateLoan(car.harga, 20, 36);
-      modalMonthly.textContent = formatRupiah(sim.monthlyInstallment) + ' / bln (DP 20%)';
+      calcEl.textContent = `${formatRupiah(sim.monthlyInstallment)} / bln (DP 20%, 36 Bln)`;
     }
 
-    // Open modal animation
-    this.carModal.classList.remove('closing');
     this.carModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
 
-    if (scrollToBooking) {
-      setTimeout(() => {
-        const form = this.carModal.querySelector('#modalBookingForm');
-        if (form) form.scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+  openWishlistModal() {
+    if (!this.wishlistModal) return;
+
+    const list = document.getElementById('wishlistContainerList');
+    if (list) {
+      list.innerHTML = '';
+      const savedCars = this.allCars.filter(c => this.wishlist.has(c.id));
+
+      if (savedCars.length === 0) {
+        list.innerHTML = `
+          <div style="text-align:center; padding:3rem 1rem;">
+            <p style="color:var(--text-muted); font-size:0.92rem;">Belum ada mobil yang disimpan di favorit Anda.</p>
+          </div>
+        `;
+      } else {
+        savedCars.forEach(car => {
+          const item = document.createElement('div');
+          item.style = 'display:flex; align-items:center; gap:0.85rem; padding:0.75rem; background:var(--bg-surface-elevated); border:1px solid var(--border-default); border-radius:var(--r-sm); margin-bottom:0.6rem;';
+          item.innerHTML = `
+            <img src="${car.foto}" alt="${car.nama}" style="width:65px; height:45px; object-fit:cover; border-radius:4px;">
+            <div style="flex:1;">
+              <div style="font-size:0.75rem; color:var(--accent-blue-text); font-weight:700;">${car.brand}</div>
+              <div style="font-size:0.92rem; font-weight:700; color:var(--text-main);">${car.nama}</div>
+              <div style="font-size:0.85rem; font-weight:700; color:#10b981;">${formatRupiah(car.harga)}</div>
+            </div>
+            <button class="btn-remove-fav" style="color:#ef4444; padding:0.4rem;" title="Hapus">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          `;
+          item.querySelector('.btn-remove-fav').addEventListener('click', () => {
+            this.toggleWishlist(car, null);
+            this.openWishlistModal();
+            this.render();
+          });
+          list.appendChild(item);
+        });
+      }
     }
+
+    this.wishlistModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   closeModal(modal) {
@@ -324,241 +439,126 @@ class VeloceApp {
       modal.classList.remove('active');
       modal.classList.remove('closing');
       document.body.style.overflow = '';
-    }, 250);
-  }
-
-  openWishlistModal() {
-    if (!this.wishlistModal) return;
-
-    const listContainer = this.wishlistModal.querySelector('#wishlistItemsList');
-    if (listContainer) {
-      listContainer.innerHTML = '';
-
-      const savedCars = this.allCars.filter(c => this.wishlist.has(c.id));
-
-      if (savedCars.length === 0) {
-        listContainer.innerHTML = `
-          <div style="text-align:center; padding:3rem 1rem;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" style="margin-bottom:1rem;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <h4 style="font-size:1.1rem; color:var(--text-heading); margin-bottom:0.5rem;">Garasi Favorit Anda Masih Kosong</h4>
-            <p style="font-size:0.9rem; color:var(--text-secondary);">Klik ikon hati pada mobil yang Anda minati untuk menyimpannya di sini.</p>
-          </div>
-        `;
-      } else {
-        savedCars.forEach(car => {
-          const item = document.createElement('div');
-          item.className = 'wishlist-card-item';
-          item.style = 'display:flex; align-items:center; gap:1rem; padding:1rem; background:var(--bg-tertiary); border:1px solid var(--border-light); border-radius:var(--radius-sm); margin-bottom:0.75rem;';
-          item.innerHTML = `
-            <img src="${car.foto}" alt="${car.nama}" style="width:75px; height:50px; object-fit:cover; border-radius:6px; flex-shrink:0;">
-            <div style="flex:1;">
-              <div style="font-size:0.75rem; color:#38bdf8; font-weight:700;">${car.brand}</div>
-              <div style="font-size:0.95rem; font-weight:700; color:var(--text-heading);">${car.nama}</div>
-              <div style="font-size:0.9rem; font-weight:700; color:#34d399;">${formatRupiah(car.harga)}</div>
-            </div>
-            <button class="btn-remove-wishlist" style="color:#ef4444; padding:0.5rem; border-radius:6px;" title="Hapus dari favorit">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            </button>
-          `;
-
-          item.querySelector('.btn-remove-wishlist').addEventListener('click', () => {
-            this.toggleWishlistCar(car, null);
-            this.openWishlistModal(); // Re-render list
-            this.applyFilterAndRender(); // Re-sync cards in grid
-          });
-
-          listContainer.appendChild(item);
-        });
-      }
-    }
-
-    this.wishlistModal.classList.remove('closing');
-    this.wishlistModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    }, 180);
   }
 
   /* ---------------- Event Listeners ---------------- */
   bindEvents() {
-    // Theme toggle
-    if (this.themeToggleBtn) {
-      this.themeToggleBtn.addEventListener('click', () => this.toggleTheme());
-    }
+    this.themeToggleBtn?.addEventListener('click', () => this.toggleTheme());
+    this.wishlistBtn?.addEventListener('click', () => this.openWishlistModal());
 
-    // Wishlist open
-    if (this.wishlistBtn) {
-      this.wishlistBtn.addEventListener('click', () => this.openWishlistModal());
-    }
+    // Compare bar actions
+    this.compareLaunchBtn?.addEventListener('click', () => this.openCompareModal());
+    this.compareClearBtn?.addEventListener('click', () => this.clearCompare());
 
-    // Mobile Menu toggle
-    if (this.menuToggleBtn && this.navMenu) {
-      this.menuToggleBtn.addEventListener('click', () => {
-        this.navMenu.classList.toggle('open');
-      });
+    // Mobile nav
+    this.mobileMenuBtn?.addEventListener('click', () => {
+      this.navMenu?.classList.toggle('open');
+    });
 
-      // Close menu on nav link click
-      this.navMenu.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          this.navMenu.classList.remove('open');
-        });
-      });
-    }
+    this.navMenu?.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => this.navMenu?.classList.remove('open'));
+    });
 
     // Search input
-    if (this.searchInput) {
-      this.searchInput.addEventListener('input', (e) => {
-        this.filterState.keyword = e.target.value;
-        if (this.searchClearBtn) {
-          this.searchClearBtn.classList.toggle('visible', e.target.value.length > 0);
-        }
-        this.applyFilterAndRender();
-      });
-    }
+    this.searchInput?.addEventListener('input', (e) => {
+      this.filterState.keyword = e.target.value;
+      this.searchClearBtn?.classList.toggle('visible', e.target.value.length > 0);
+      this.render();
+    });
 
-    // Search clear button
-    if (this.searchClearBtn) {
-      this.searchClearBtn.addEventListener('click', () => {
-        this.searchInput.value = '';
-        this.filterState.keyword = '';
-        this.searchClearBtn.classList.remove('visible');
-        this.applyFilterAndRender();
-        this.searchInput.focus();
-      });
-    }
+    this.searchClearBtn?.addEventListener('click', () => {
+      if (this.searchInput) this.searchInput.value = '';
+      this.filterState.keyword = '';
+      this.searchClearBtn?.classList.remove('visible');
+      this.render();
+      this.searchInput?.focus();
+    });
 
-    // Fuel filter pills
-    this.fuelPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        this.fuelPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        this.filterState.fuel = pill.dataset.fuel;
-        this.applyFilterAndRender();
+    // Fuel Chips
+    this.fuelChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        this.fuelChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        this.filterState.fuel = chip.dataset.fuel;
+        this.render();
       });
     });
 
-    // Secondary Dropdowns
-    if (this.sortSelect) {
-      this.sortSelect.addEventListener('change', (e) => {
-        this.filterState.sort = e.target.value;
-        this.applyFilterAndRender();
-      });
-    }
+    // Dropdowns
+    this.sortSelect?.addEventListener('change', (e) => {
+      this.filterState.sort = e.target.value;
+      this.render();
+    });
 
-    if (this.brandSelect) {
-      this.brandSelect.addEventListener('change', (e) => {
-        this.filterState.brand = e.target.value;
-        this.applyFilterAndRender();
-      });
-    }
+    this.brandSelect?.addEventListener('change', (e) => {
+      this.filterState.brand = e.target.value;
+      this.render();
+    });
 
-    if (this.transSelect) {
-      this.transSelect.addEventListener('change', (e) => {
-        this.filterState.transmission = e.target.value;
-        this.applyFilterAndRender();
-      });
-    }
+    this.transSelect?.addEventListener('change', (e) => {
+      this.filterState.transmission = e.target.value;
+      this.render();
+    });
 
-    if (this.statusSelect) {
-      this.statusSelect.addEventListener('change', (e) => {
-        this.filterState.status = e.target.value;
-        this.applyFilterAndRender();
-      });
-    }
+    this.statusSelect?.addEventListener('change', (e) => {
+      this.filterState.status = e.target.value;
+      this.render();
+    });
 
-    // Reset button
-    if (this.resetBtn) {
-      this.resetBtn.addEventListener('click', () => this.resetFilters());
-    }
+    this.resetBtn?.addEventListener('click', () => this.resetFilters());
 
-    // Modal Close Buttons & Backdrop click
-    document.querySelectorAll('.modal-backdrop').forEach(modal => {
-      const closeBtn = modal.querySelector('.modal-close-btn');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', () => this.closeModal(modal));
-      }
+    // Modal Close
+    document.querySelectorAll('.modal-layer').forEach(modal => {
+      modal.querySelector('.modal-btn-x')?.addEventListener('click', () => this.closeModal(modal));
       modal.addEventListener('click', (e) => {
         if (e.target === modal) this.closeModal(modal);
       });
     });
 
-    // Escape key closes modals
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-backdrop.active').forEach(modal => this.closeModal(modal));
+        document.querySelectorAll('.modal-layer.active').forEach(m => this.closeModal(m));
       }
     });
 
-    // Test drive booking form submit
-    const bookingForm = document.getElementById('modalBookingForm');
+    // Booking test drive form
+    const bookingForm = document.getElementById('testDriveForm');
     if (bookingForm) {
       bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const carName = document.getElementById('bookingCarName').value;
-        const custName = document.getElementById('bookingName').value;
-        const custWa = document.getElementById('bookingPhone').value;
-        const custDate = document.getElementById('bookingDate').value;
+        const targetCar = document.getElementById('bookingCarTarget')?.value || 'Mobil';
+        const name = document.getElementById('bookingCustName')?.value || 'Pelanggan';
+        const phone = document.getElementById('bookingCustPhone')?.value || '';
+        const date = document.getElementById('bookingCustDate')?.value || '';
 
         this.closeModal(this.carModal);
         showToast(
-          'Permintaan Test Drive Terkirim!',
-          `Terima kasih Kak ${custName}, tim konsultan Veloce Auto akan segera menghubungi Anda di ${custWa} untuk jadwal ${custDate}.`,
+          'Jadwal Test Drive Terkirim',
+          `Terima kasih Kak ${name}. Tim showroom akan segera menghubungi nomor ${phone} untuk konfirmasi test drive ${targetCar} pada ${date}.`,
           'success'
         );
         bookingForm.reset();
       });
     }
 
-    // Newsletter form submit
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('newsletterEmail').value;
-        showToast('Berhasil Berlangganan', `Alamat ${email} telah terdaftar untuk menerima katalog promo mingguan Veloce Auto!`, 'success');
-        newsletterForm.reset();
-      });
-    }
-
-    // Setup minimum date for test drive booking (minimum tomorrow)
-    const bookingDateInput = document.getElementById('bookingDate');
-    if (bookingDateInput) {
+    // Set minimum booking date to tomorrow
+    const dateInput = document.getElementById('bookingCustDate');
+    if (dateInput) {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const dateStr = tomorrow.toISOString().split('T')[0];
-      bookingDateInput.min = dateStr;
-      bookingDateInput.value = dateStr;
+      const str = tomorrow.toISOString().split('T')[0];
+      dateInput.min = str;
+      dateInput.value = str;
     }
 
-    // Scroll Navbar Effect & Scroll Spy for Active Nav Link
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
-
+    // Sticky nav scroll shadow
     window.addEventListener('scroll', () => {
-      const scrollY = window.pageYOffset;
-      const header = document.querySelector('.site-header');
-      if (header) {
-        header.classList.toggle('scrolled', scrollY > 30);
-      }
-
-      // Scroll Spy
-      sections.forEach(current => {
-        const sectionHeight = current.offsetHeight;
-        const sectionTop = current.offsetTop - 120;
-        const sectionId = current.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
+      document.querySelector('.site-nav')?.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
   }
 }
 
-// Start app once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   new VeloceApp();
 });

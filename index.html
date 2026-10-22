@@ -3,503 +3,325 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Veloce Auto - Showroom & E-Commerce Mobil Premium Terpercaya. Tugas Akhir BTNG Kelas Frontend DNCC Udinus 2026." />
+  <meta name="description" content="Veloce Auto - Showroom & E-Commerce Mobil Premium. Tugas Akhir BTNG Kelas Frontend DNCC Udinus 2026." />
   <meta name="author" content="Arkaan Taqiyyuddin Ilham Achmad Wijaya" />
-  <title>VELOCE AUTO — Premium Car Showroom & E-Commerce</title>
+  <title>Veloce Auto — Showroom & Katalog Mobil Terverifikasi</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2'/><circle cx='7' cy='17' r='2'/><path d='M9 17h6'/><circle cx='17' cy='17' r='2'/></svg>" />
 
-  <!-- CSS Stylesheets -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
-  <!-- Ambient Decorative Background Glows -->
-  <div class="ambient-glow glow-top-left"></div>
-  <div class="ambient-glow glow-bottom-right"></div>
-
-  <!-- SITE HEADER / NAVBAR -->
-  <header class="site-header">
-    <div class="container nav-container">
-      <a href="#beranda" class="brand-logo" aria-label="Beranda Veloce Auto">
-        <span class="logo-badge">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- SITE NAVIGATION -->
+  <nav class="site-nav">
+    <div class="container nav-wrapper">
+      
+      <!-- Brand Logo -->
+      <a href="#katalog" class="nav-brand" aria-label="Veloce Auto">
+        <div class="brand-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2"></path>
             <circle cx="7" cy="17" r="2"></circle>
             <path d="M9 17h6"></path>
             <circle cx="17" cy="17" r="2"></circle>
           </svg>
-        </span>
-        <span>VELOCE <span class="text-gradient">AUTO</span></span>
+        </div>
+        <span>VELOCE <span style="color:var(--accent-blue-text);">AUTO</span></span>
       </a>
 
-      <!-- Navigation Menu -->
-      <nav>
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#beranda" class="nav-link active">Beranda</a></li>
-          <li><a href="#keunggulan" class="nav-link">Keunggulan</a></li>
-          <li><a href="#katalog" class="nav-link">Katalog Mobil</a></li>
-          <li><a href="#simulasi" class="nav-link">Simulasi Kredit</a></li>
-          <li><a href="#testimoni" class="nav-link">Testimoni</a></li>
-          <li><a href="#faq" class="nav-link">FAQ</a></li>
-          <li><a href="#kontak" class="nav-link">Kontak</a></li>
-        </ul>
-      </nav>
+      <!-- Navigation Links -->
+      <ul class="nav-links-list" id="navMenu">
+        <li><a href="#katalog" class="nav-item-link active">Katalog Mobil</a></li>
+        <li><a href="#simulasi" class="nav-item-link">Simulasi Kredit</a></li>
+        <li><a href="#inspeksi" class="nav-item-link">Standar Inspeksi</a></li>
+        <li><a href="#kontak" class="nav-item-link">Kontak Showroom</a></li>
+      </ul>
 
-      <!-- Nav Actions -->
-      <div class="nav-actions">
-        <!-- Wishlist Button -->
-        <button class="action-btn" id="wishlistBtn" aria-label="Lihat Garasi Favorit" title="Garasi Favorit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Action Buttons -->
+      <div class="nav-right-actions">
+        <!-- Wishlist / Favorit -->
+        <button class="nav-btn-icon" id="wishlistBtn" aria-label="Mobil Favorit" title="Lihat Favorit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
-          <span class="wishlist-count-badge" id="wishlistCount" style="display:none;">0</span>
+          <span class="nav-badge-pill" id="wishlistBadge" style="display:none;">0</span>
         </button>
 
-        <!-- Theme Toggle Button -->
-        <button class="action-btn" id="themeToggleBtn" aria-label="Ganti Tema" title="Ganti Mode Tampilan">
-          <!-- Dynamically populated via app.js -->
+        <!-- Theme Switcher -->
+        <button class="nav-btn-icon" id="themeToggleBtn" aria-label="Ganti Tema" title="Ganti Mode Tampilan">
+          <!-- Populated by JS -->
         </button>
 
-        <!-- CTA Nav Button -->
-        <a href="#katalog" class="btn-primary-nav btn-interactive">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          Cari Mobil
-        </a>
-
-        <!-- Mobile Menu Toggle Button -->
-        <button class="action-btn menu-toggle" id="menuToggleBtn" aria-label="Buka Menu Navigasi">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-btn-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
       </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO / BANNER HEADER -->
+  <header class="hero-wrapper">
+    <div class="container">
+      <div class="hero-header-row">
+        
+        <div class="hero-text-block">
+          <div class="hero-pill-tag">
+            <span>●</span>
+            Katalog Resmi BTNG DNCC 2026
+          </div>
+          <h1 class="hero-main-title">
+            Koleksi Mobil Pilihan & Terverifikasi
+          </h1>
+          <p class="hero-subtitle">
+            Pilihan armada baru dan bekas berkualitas tinggi. Cek ketersediaan secara real-time, simulasi cicilan pembiayaan, atau hubungi konsultan kami via WhatsApp.
+          </p>
+        </div>
+
+        <div class="hero-meta-badges">
+          <div class="meta-metric-card">
+            <span class="metric-val" id="metaTotalUnits">12</span>
+            <span class="metric-label">Total Unit</span>
+          </div>
+          <div class="meta-metric-card">
+            <span class="metric-val" style="color:#10b981;" id="metaAvailUnits">10</span>
+            <span class="metric-label">Unit Tersedia</span>
+          </div>
+          <div class="meta-metric-card">
+            <span class="metric-val" id="metaBrandsCount">9</span>
+            <span class="metric-label">Brand Pilihan</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
+  <!-- MAIN CONTENT AREA -->
+  <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
 
-    <!-- HERO SECTION -->
-    <section id="beranda" class="hero-section">
-      <div class="container hero-grid">
+    <!-- CAR CATALOG & QUICK CONTROLS -->
+    <section id="katalog">
+      
+      <!-- Unified Control Bar -->
+      <div class="controls-card">
         
-        <!-- Hero Content -->
-        <div class="hero-content">
-          <div class="hero-badge-pill">
-            <span class="status-dot" style="background:#38bdf8;"></span>
-            Official Showroom Partner • BTNG 2026
-          </div>
-
-          <h1 class="hero-title">
-            Temukan Sensasi <span class="text-gradient">Kendaraan Mewah</span> & Bergaransi Resmi
-          </h1>
-
-          <p class="hero-desc">
-            Veloce Auto menghadirkan kurasi mobil premium terbaik yang telah lolos inspeksi 150+ titik uji kelayakan. Dilengkapi transparansi harga, suku bunga kompetitif, dan garansi mesin 1 tahun.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#katalog" class="btn-main-cta btn-interactive">
-              Jelajahi Koleksi Mobil
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
+        <!-- Primary Row: Search & Fuel Category Chips -->
+        <div class="controls-primary-bar">
+          <div class="search-box-unified">
+            <svg class="search-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="searchInput" 
+              class="search-input-field" 
+              placeholder="Cari mobil berdasarkan nama atau brand (e.g. BYD, Fortuner, Civic)..." 
+              autocomplete="off"
+            />
+            <button class="search-clear-cross" id="searchClearBtn" aria-label="Bersihkan pencarian">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
-            </a>
-            <a href="#simulasi" class="btn-secondary-cta btn-interactive">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-                <line x1="8" y1="6" x2="16" y2="6"></line>
-                <line x1="16" y1="14" x2="16" y2="18"></line>
-                <path d="M16 10h.01"></path>
-                <path d="M12 10h.01"></path>
-                <path d="M8 10h.01"></path>
-                <path d="M12 14h.01"></path>
-                <path d="M8 14h.01"></path>
-                <path d="M12 18h.01"></path>
-                <path d="M8 18h.01"></path>
-              </svg>
-              Hitung Cicilan Kredit
-            </a>
-          </div>
-
-          <!-- Hero Live Stats Row -->
-          <div class="hero-stats-row">
-            <div class="stat-item">
-              <span class="stat-number text-gradient" id="heroStatTotal">12</span>
-              <span class="stat-label">Total Unit Mobil</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number" style="color:#10b981;" id="heroStatAvail">10</span>
-              <span class="stat-label">Unit Siap Kirim</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number" id="heroStatBrands">9+</span>
-              <span class="stat-label">Brand Ternama</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number text-gradient-gold">99.8%</span>
-              <span class="stat-label">Tingkat Kepuasan</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Visual Showcase -->
-        <div class="hero-visual">
-          
-          <!-- Top Floating Badge -->
-          <div class="hero-floating-badge float-top animate-float">
-            <div class="floating-icon-box blue">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="floating-title">150+ Titik Inspeksi</div>
-              <div class="floating-desc">Bebas Banjir & Tabrakan</div>
-            </div>
-          </div>
-
-          <!-- Featured Showcase Card -->
-          <div class="hero-showcase-card">
-            <div class="hero-img-wrap">
-              <img 
-                src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80" 
-                alt="BYD Seal Performance AWD" 
-                class="hero-car-img"
-              />
-              <div class="hero-img-overlay"></div>
-              <div class="hero-card-meta">
-                <div>
-                  <div class="hero-badge-exclusive">Pilihan Terpopuler 2026</div>
-                  <h3 class="hero-card-title">BYD Seal Performance AWD</h3>
-                </div>
-                <div class="hero-card-price">Rp 719 Juta</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Floating Badge -->
-          <div class="hero-floating-badge float-bottom animate-float" style="animation-delay: -2s;">
-            <div class="floating-icon-box green">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 14 14"></polyline>
-              </svg>
-            </div>
-            <div>
-              <div class="floating-title">Proses Kilat 24 Jam</div>
-              <div class="floating-desc">Kredit & STNK Langsung Beres</div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FEATURES / USP SECTION -->
-    <section id="keunggulan" class="features-section">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Keunggulan Veloce Auto</span>
-          <h2 class="section-title">Standar Tertinggi untuk Pengalaman Terbaik</h2>
-          <p class="section-desc">Setiap kendaraan melalui proses kurasi ketat untuk memastikan performa prima dan rasa aman maksimal.</p>
-        </div>
-
-        <div class="features-grid">
-          
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <polyline points="9 12 11 14 15 10"></polyline>
-              </svg>
-            </div>
-            <h3>Garansi Mesin 1 Tahun</h3>
-            <p>Jaminan perlindungan menyeluruh untuk transmisi dan mesin utama. Bebas rasa cemas dengan layanan towing 24 jam.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-            </div>
-            <h3>Legalitas Dokumen Lengkap</h3>
-            <p>BPKB, STNK, dan faktur terverifikasi keasliannya di Samsat tanpa sengketa hukum atau tunggakan pajak.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-            </div>
-            <h3>150+ Titik Inspeksi Independen</h3>
-            <p>Pemeriksaan menyeluruh pada sistem pengereman, kelistrikan komputer, struktur sasis, hingga ruang interior.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon-wrapper">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3>Bunga Ringan & DP Fleksibel</h3>
-            <p>Bekerja sama dengan leasing dan bank terkemuka untuk menawarkan simulasi pembiayaan yang ramah kantong.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- CAR CATALOG & FILTER SECTION -->
-    <section id="katalog" class="catalog-section">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Katalog Armada Resmi</span>
-          <h2 class="section-title">Pilihan Mobil Terbaik Siap Pakai</h2>
-          <p class="section-desc">Gunakan filter cerdas di bawah untuk menemukan kendaraan yang pas dengan preferensi dan anggaran Anda.</p>
-        </div>
-
-        <!-- Filter & Control Center -->
-        <div class="catalog-controls">
-          
-          <!-- Row 1: Search & Sort -->
-          <div class="controls-top-row">
-            <div class="search-input-wrapper">
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input 
-                type="text" 
-                id="searchInput" 
-                class="search-field" 
-                placeholder="Cari berdasarkan nama mobil atau brand (misal: Fortuner, BYD, Civic)..." 
-                autocomplete="off"
-              />
-              <button class="search-clear-btn" id="searchClearBtn" aria-label="Hapus kata kunci">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-
-            <div class="sort-select-wrapper">
-              <select id="sortSelect" class="custom-select" aria-label="Urutkan Mobil">
-                <option value="recommended">Urutkan: Rekomendasi</option>
-                <option value="price-low">Harga: Termurah ke Termahal</option>
-                <option value="price-high">Harga: Termahal ke Termurah</option>
-                <option value="year-new">Tahun: Paling Baru</option>
-                <option value="name-az">Nama: A ke Z</option>
-              </select>
-              <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Row 2: Fuel Filter Pills -->
-          <div class="filter-pills-row">
-            <button class="filter-pill active" data-fuel="all" type="button">
-              <span>Semua Bahan Bakar</span>
-              <span class="pill-count">12</span>
-            </button>
-            <button class="filter-pill" data-fuel="bensin" type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M15 10h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V8l-3-3"/><line x1="3" y1="22" x2="15" y2="22"/></svg>
-              <span>Bensin</span>
-              <span class="pill-count">5</span>
-            </button>
-            <button class="filter-pill" data-fuel="diesel" type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              <span>Diesel</span>
-              <span class="pill-count">2</span>
-            </button>
-            <button class="filter-pill" data-fuel="hybrid" type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-              <span>Hybrid</span>
-              <span class="pill-count">2</span>
-            </button>
-            <button class="filter-pill" data-fuel="listrik" type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              <span>Listrik (EV)</span>
-              <span class="pill-count">3</span>
             </button>
           </div>
 
-          <!-- Row 3: Dropdowns (Brand, Transmisi, Status) -->
-          <div class="controls-secondary-row">
+          <!-- Fuel Chips -->
+          <div class="fuel-chips-wrapper">
+            <button class="chip-btn active" data-fuel="all" type="button">
+              Semua <span class="chip-count">(12)</span>
+            </button>
+            <button class="chip-btn" data-fuel="bensin" type="button">
+              Bensin <span class="chip-count">(5)</span>
+            </button>
+            <button class="chip-btn" data-fuel="diesel" type="button">
+              Diesel <span class="chip-count">(2)</span>
+            </button>
+            <button class="chip-btn" data-fuel="hybrid" type="button">
+              Hybrid <span class="chip-count">(2)</span>
+            </button>
+            <button class="chip-btn" data-fuel="listrik" type="button">
+              Listrik (EV) <span class="chip-count">(3)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Secondary Row: Brand, Transmisi, Status & Sort -->
+        <div class="controls-secondary-bar">
+          <div class="dropdown-group">
             
-            <div class="sort-select-wrapper">
-              <select id="brandSelect" class="custom-select" aria-label="Filter Brand">
+            <div class="select-wrapper-box">
+              <select id="brandSelect" class="native-select" aria-label="Pilih Brand">
                 <option value="all">Semua Brand</option>
-                <!-- Populated dynamically via JS -->
               </select>
-              <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
 
-            <div class="sort-select-wrapper">
-              <select id="transmissionSelect" class="custom-select" aria-label="Filter Transmisi">
+            <div class="select-wrapper-box">
+              <select id="transmissionSelect" class="native-select" aria-label="Pilih Transmisi">
                 <option value="all">Semua Transmisi</option>
                 <option value="Matic">Matic</option>
                 <option value="CVT">CVT</option>
                 <option value="Manual">Manual</option>
               </select>
-              <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
 
-            <div class="sort-select-wrapper">
-              <select id="statusSelect" class="custom-select" aria-label="Filter Status">
+            <div class="select-wrapper-box">
+              <select id="statusSelect" class="native-select" aria-label="Pilih Status">
                 <option value="all">Semua Status</option>
                 <option value="tersedia">Hanya Tersedia</option>
                 <option value="sold">Sudah Terjual</option>
               </select>
-              <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
 
-            <button id="resetFiltersBtn" class="reset-filters-btn" type="button">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M23 4v6h-6"></path>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-              </svg>
-              Reset Filter
-            </button>
+            <div class="select-wrapper-box">
+              <select id="sortSelect" class="native-select" aria-label="Urutkan">
+                <option value="recommended">Urutkan: Rekomendasi</option>
+                <option value="price-low">Harga: Termurah</option>
+                <option value="price-high">Harga: Termahal</option>
+                <option value="year-new">Tahun: Terbaru</option>
+                <option value="name-az">Nama: A - Z</option>
+              </select>
+              <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
 
           </div>
 
-        </div>
-
-        <!-- Filter Summary Bar -->
-        <div class="filter-summary-bar">
-          <div class="results-count" id="resultsCount">
-            Memuat daftar armada...
-          </div>
-        </div>
-
-        <!-- Cars Grid (Rendered via API & Vanilla DOM) -->
-        <div class="cars-grid" id="carsGrid">
-          <!-- Skeletons and dynamic car cards will be rendered here by dom.js -->
+          <button id="resetFiltersBtn" class="btn-reset-clean" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Reset Filter
+          </button>
         </div>
 
       </div>
+
+      <!-- Status Count Bar -->
+      <div class="results-status-bar">
+        <span id="resultsCount">Memuat armada mobil...</span>
+      </div>
+
+      <!-- Cars Grid (Rendered via API & Pure Vanilla DOM) -->
+      <div class="catalog-grid" id="carsGrid">
+        <!-- Rendered by dom.js -->
+      </div>
+
     </section>
 
-    <!-- INTERACTIVE CREDIT CALCULATOR SECTION -->
-    <section id="simulasi" class="calculator-section">
+    <!-- FLOATING BAR: COMPARE CARS -->
+    <aside class="floating-compare-bar" id="floatingCompareBar">
+      <div class="compare-bar-info">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue-text)" stroke-width="2"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        <span id="compareCountText">0/2 Mobil Terpilih</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <button class="btn-launch-compare" id="btnLaunchCompare" type="button">
+          Bandingkan Sekarang
+        </button>
+        <button class="btn-clear-compare" id="btnClearCompare" type="button">
+          Batal
+        </button>
+      </div>
+    </aside>
+
+    <!-- CREDIT SIMULATOR SECTION -->
+    <section id="simulasi" class="simulator-section" style="margin-top: 4rem; border-radius: var(--r-lg);">
       <div class="container">
         
-        <div class="section-header">
-          <span class="section-tag">Simulasi Pembiayaan</span>
-          <h2 class="section-title">Kalkulator Kredit Cerdas & Transparan</h2>
-          <p class="section-desc">Hitung estimasi angsuran bulanan berdasarkan uang muka (DP) dan tenor pilihan Anda.</p>
+        <div class="section-title-wrap">
+          <div class="section-tagline">Pembiayaan Transparan</div>
+          <h2 class="section-h2">Simulasi Angsuran Bulanan</h2>
+          <p style="color:var(--text-muted); font-size:0.95rem;">Hitung perkiraan angsuran kredit dengan uang muka dan tenor yang dapat disesuaikan.</p>
         </div>
 
-        <div class="calculator-card">
+        <div class="sim-container-card">
           
-          <!-- Inputs Column -->
-          <div class="calc-inputs">
+          <div class="sim-form-col">
             
-            <div class="calc-group">
-              <label for="calcCarSelect" class="calc-label">Pilih Unit Kendaraan</label>
-              <div class="sort-select-wrapper">
-                <select id="calcCarSelect" class="custom-select" aria-label="Pilih Mobil untuk Simulasi">
+            <div class="sim-field-group">
+              <label for="calcCarSelect" class="sim-field-label">Pilih Unit Mobil</label>
+              <div class="select-wrapper-box" style="width:100%;">
+                <select id="calcCarSelect" class="native-select" style="height:42px;">
                   <!-- Populated dynamically via JS -->
                 </select>
-                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
             </div>
 
-            <div class="calc-group">
-              <div class="calc-label-row">
-                <label for="calcDpRange" class="calc-label">Persentase Uang Muka (DP)</label>
-                <span class="calc-value-display" id="calcDpValue">20%</span>
+            <div class="sim-field-group">
+              <div class="sim-field-label">
+                <span>Uang Muka (Down Payment / DP)</span>
+                <span id="calcDpValue" style="color:var(--accent-blue-text);">20%</span>
               </div>
-              <input type="range" id="calcDpRange" class="calc-range" min="15" max="60" step="5" value="20" />
-              <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">
+              <input type="range" id="calcDpRange" class="sim-range-slider" min="15" max="60" step="5" value="20" />
+              <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim); margin-top:2px;">
                 <span>Min 15%</span>
                 <span>Standar 20% - 30%</span>
-                <span>Max 60%</span>
+                <span>Maks 60%</span>
               </div>
             </div>
 
-            <div class="calc-group">
-              <label class="calc-label">Jangka Waktu Cicilan (Tenor)</label>
-              <div class="tenor-pills" id="calcTenorPills">
-                <button type="button" class="tenor-btn" data-tenor="12">12 Bln</button>
-                <button type="button" class="tenor-btn" data-tenor="24">24 Bln</button>
-                <button type="button" class="tenor-btn active" data-tenor="36">36 Bln</button>
-                <button type="button" class="tenor-btn" data-tenor="48">48 Bln</button>
-                <button type="button" class="tenor-btn" data-tenor="60">60 Bln</button>
+            <div class="sim-field-group">
+              <label class="sim-field-label">Pilihan Tenor Cicilan</label>
+              <div class="tenor-button-group" id="calcTenorPills">
+                <button type="button" class="tenor-choice-btn" data-tenor="12">12 Bln</button>
+                <button type="button" class="tenor-choice-btn" data-tenor="24">24 Bln</button>
+                <button type="button" class="tenor-choice-btn active" data-tenor="36">36 Bln</button>
+                <button type="button" class="tenor-choice-btn" data-tenor="48">48 Bln</button>
+                <button type="button" class="tenor-choice-btn" data-tenor="60">60 Bln</button>
               </div>
             </div>
 
           </div>
 
-          <!-- Result Output Box -->
-          <div class="calc-result-box">
+          <!-- Simulation Output -->
+          <div class="sim-summary-col">
             <div>
-              <div class="result-header">
-                <span class="result-badge">Estimasi Cicilan Bulanan</span>
-                <div class="result-monthly" id="calcResultMonthly">Rp 0 / bln</div>
+              <div class="sim-calc-head">
+                <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-dim); font-weight:700; letter-spacing:0.04em;">Estimasi Cicilan per Bulan</span>
+                <div class="sim-installment-figure" id="calcResultMonthly">Rp 0 / bln</div>
               </div>
 
-              <div class="result-breakdown">
-                <div class="breakdown-row">
-                  <span>Uang Muka (DP):</span>
+              <div class="sim-table-rows">
+                <div class="sim-row">
+                  <span>Nominal Uang Muka (DP):</span>
                   <span id="calcResultDp">Rp 0</span>
                 </div>
-                <div class="breakdown-row">
+                <div class="sim-row">
                   <span>Pokok Pembiayaan:</span>
                   <span id="calcResultPrincipal">Rp 0</span>
                 </div>
-                <div class="breakdown-row">
-                  <span>Suku Bunga Flat:</span>
-                  <span style="color:#60a5fa;">5.5% / tahun</span>
+                <div class="sim-row">
+                  <span>Suku Bunga Flat Acuan:</span>
+                  <span>5.5% / tahun</span>
                 </div>
-                <div class="breakdown-row" style="border-top:1px dashed var(--border-light); padding-top:0.75rem;">
+                <div class="sim-row" style="border-top:1px dashed var(--border-default); padding-top:0.6rem;">
                   <span>Total Pengeluaran:</span>
-                  <span id="calcResultTotal" style="color:#fbbf24;">Rp 0</span>
+                  <span id="calcResultTotal" style="color:var(--text-main);">Rp 0</span>
                 </div>
               </div>
             </div>
 
-            <a href="#kontak" class="btn-apply-credit btn-interactive">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Ajukan Kredit Sekarang
+            <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20tertarik%20mengajukan%20simulasi%20kredit%20mobil." target="_blank" class="btn-chat-wa" style="width:100%; height:44px;">
+              Konsultasi Pengajuan via WhatsApp
             </a>
           </div>
 
@@ -508,366 +330,209 @@
       </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section id="testimoni" class="testimonials-section">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Ulasan Klien</span>
-          <h2 class="section-title">Dipercaya Ribuan Pemilik Mobil</h2>
-          <p class="section-desc">Kepuasan dan transparansi adalah fondasi utama kami melayani setiap customer.</p>
+    <!-- STANDARDS & INSPECTION SECTION -->
+    <section id="inspeksi" class="standards-section">
+      <div class="section-title-wrap">
+        <div class="section-tagline">Jaminan Transaksi Aman</div>
+        <h2 class="section-h2">4 Standar Kualitas Veloce Auto</h2>
+        <p style="color:var(--text-muted); font-size:0.95rem;">Langkah konkret kami dalam memastikan setiap unit layak jalan dan bebas risiko.</p>
+      </div>
+
+      <div class="standards-grid">
+        <div class="standard-card">
+          <span class="standard-num">01</span>
+          <h3>Uji Fisik & Mesin Bebas Masalah</h3>
+          <p>Pemeriksaan menyeluruh pada kompresi ruang bakar, sistem pengereman ABS, fluida, dan kelistrikan komputer.</p>
         </div>
 
-        <div class="testimonials-grid">
-          
-          <div class="testimonial-card">
-            <div class="rating-stars">
-              ★★★★★
-            </div>
-            <p class="testimonial-text">
-              "Beli BYD Seal di Veloce Auto pelayanannya memuaskan banget! Unit datang dalam kondisi super mulus, laporan inspeksi 150 titik sangat transparan, dan dibantu pengurusan garansi."
-            </p>
-            <div class="user-info">
-              <div class="user-avatar">DR</div>
-              <div>
-                <div class="user-name">Dimas Raditya</div>
-                <div class="user-car">Pembeli BYD Seal Performance</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="rating-stars">
-              ★★★★★
-            </div>
-            <p class="testimonial-text">
-              "Proses simulasi kredit di website sangat akurat. Pas saya datang ke showroom, nominal cicilan dan DP-nya sesuai persis dengan kalkulator online. Sangat profesional!"
-            </p>
-            <div class="user-info">
-              <div class="user-avatar">SL</div>
-              <div>
-                <div class="user-name">Siti Lestari</div>
-                <div class="user-car">Pembeli Honda CR-V Hybrid</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="rating-stars">
-              ★★★★★
-            </div>
-            <p class="testimonial-text">
-              "Pengiriman unit ke luar kota rapi dan aman pakai towing tertutup. Dokumen STNK dan BPKB langsung selesai tepat waktu. Recommended showroom untuk mobil bekas maupun baru!"
-            </p>
-            <div class="user-info">
-              <div class="user-avatar">BA</div>
-              <div>
-                <div class="user-name">Budi Santoso</div>
-                <div class="user-car">Pembeli Fortuner 2.8 GR Sport</div>
-              </div>
-            </div>
-          </div>
-
+        <div class="standard-card">
+          <span class="standard-num">02</span>
+          <h3>Garansi Bebas Banjir & Tabrakan</h3>
+          <p>Inspeksi pilar sasis dan apron depan menjamin kendaraan tidak pernah mengalami kecelakaan berat atau terendam air.</p>
         </div>
 
+        <div class="standard-card">
+          <span class="standard-num">03</span>
+          <h3>Legalitas Dokumen Terverifikasi</h3>
+          <p>Pengecekan keaslian fisik BPKB, STNK, dan faktur pembelian langsung ke Samsat tanpa tunggakan pajak.</p>
+        </div>
+
+        <div class="standard-card">
+          <span class="standard-num">04</span>
+          <h3>Layanan Antar Unit ke Rumah</h3>
+          <p>Pengantaran unit langsung ke depan pintu rumah Anda dengan towing tertutup dan asuransi perjalanan lengkap.</p>
+        </div>
       </div>
     </section>
 
-    <!-- FAQ SECTION -->
-    <section id="faq" class="faq-section">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Pertanyaan Umum</span>
-          <h2 class="section-title">Semua yang Perlu Anda Ketahui</h2>
-          <p class="section-desc">Jawaban ringkas dan jelas seputar proses pembelian, garansi, dan simulasi kredit.</p>
-        </div>
-
-        <div class="faq-list">
-          
-          <details class="faq-item" open>
-            <summary class="faq-summary">
-              <span>Apa saja dokumen yang dibutuhkan untuk pengajuan kredit?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </summary>
-            <div class="faq-content">
-              Dokumen umum meliputi KTP Pemohon & Pasangan (bila sudah menikah), Kartu Keluarga (KK), NPWP, Bukti Penghasilan (Slip Gaji 3 bulan terakhir atau Rekening Koran), serta PBB / Bukti Kepemilikan Rumah.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-summary">
-              <span>Apakah setiap mobil dijamin bebas banjir dan kecelakaan besar?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </summary>
-            <div class="faq-content">
-              Ya, 100%. Kami memberikan sertifikat garansi uang kembali (*buyback guarantee*) bila terbukti unit pernah mengalami benturan sasis utama atau terendam banjir.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-summary">
-              <span>Apakah saya bisa menjadwalkan Test Drive langsung di rumah?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </summary>
-            <div class="faq-content">
-              Tentu bisa! Layanan *Home Test Drive* kami tersedia untuk area Semarang, Solo, Jogja, dan sekitarnya tanpa biaya tambahan. Anda cukup mengisi formulir booking pada detail mobil.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary class="faq-summary">
-              <span>Bagaimana jika unit yang saya minati berstatus "Sudah Terjual"?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </summary>
-            <div class="faq-content">
-              Anda bisa menghubungi tim konsultan kami melalui tombol WhatsApp untuk melakukan *pre-order* atau mencarikan unit sejenis yang baru masuk ke *inventory* kami.
-            </div>
-          </details>
-
-        </div>
-
+    <!-- CONTACT SHOWROOM -->
+    <section id="kontak" style="margin-top:2rem; padding:2rem; background:var(--bg-surface); border:1px solid var(--border-default); border-radius:var(--r-md); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
+      <div>
+        <h3 style="font-size:1.35rem; margin-bottom:0.25rem;">Punya Pertanyaan Seputar Unit Mobil?</h3>
+        <p style="color:var(--text-muted); font-size:0.92rem;">Showroom kami buka Senin - Sabtu (08.00 - 18.00 WIB). Kunjungi langsung atau hubungi tim sales online.</p>
       </div>
-    </section>
-
-    <!-- CONTACT & CTA BANNER -->
-    <section id="kontak" class="catalog-section" style="padding-top:2rem;">
-      <div class="container">
-        
-        <div style="background:linear-gradient(135deg, #1e293b, #0f172a); border:1px solid var(--border-glow); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center; position:relative; overflow:hidden;">
-          <span class="hero-badge-pill" style="margin-bottom:1rem;">Layanan Prioritas 24/7</span>
-          <h2 style="font-size:2.5rem; margin-bottom:1rem;">Siap Membawa Pulang Mobil Idaman Anda?</h2>
-          <p style="color:var(--text-secondary); max-width:620px; margin:0 auto 2rem; font-size:1.05rem;">
-            Konsultasikan kebutuhan otomotif Anda bersama pakar Veloce Auto. Dapatkan penawaran bunga spesial, bonus kaca film premium, dan garansi resmi.
-          </p>
-          <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
-            <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20tertarik%20konsultasi%20pembelian%20mobil%20dari%20katalog." target="_blank" rel="noopener noreferrer" class="btn-main-cta btn-interactive" style="background:#10b981; box-shadow:0 8px 24px rgba(16,185,129,0.35);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
-              Hubungi via WhatsApp Hotline
-            </a>
-            <a href="#katalog" class="btn-secondary-cta btn-interactive">
-              Kembali ke Katalog
-            </a>
-          </div>
-        </div>
-
+      <div style="display:flex; gap:0.75rem;">
+        <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20ingin%20bertanya%20mengenai%20katalog%20mobil." target="_blank" rel="noopener noreferrer" class="btn-chat-wa" style="height:42px; padding:0 1.25rem;">
+          Hubungi WhatsApp (+62 812-3456-7890)
+        </a>
       </div>
     </section>
 
   </main>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
+  <footer class="footer-area">
     <div class="container">
-      
-      <div class="footer-grid">
-        
-        <div class="footer-brand">
-          <a href="#beranda" class="brand-logo">
-            <span class="logo-badge">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2"></path>
-                <circle cx="7" cy="17" r="2"></circle>
-                <path d="M9 17h6"></path>
-                <circle cx="17" cy="17" r="2"></circle>
-              </svg>
-            </span>
-            <span>VELOCE <span class="text-gradient">AUTO</span></span>
-          </a>
-          <p class="footer-desc">
-            Pusat showroom dan penjualan mobil premium nomor 1 dengan standar inspeksi teknis berkelas dunia, transparansi riwayat, serta kemudahan proses pembiayaan.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h4>Navigasi Cepat</h4>
-          <ul class="footer-links">
-            <li><a href="#beranda">Beranda Utama</a></li>
-            <li><a href="#katalog">Koleksi Mobil</a></li>
-            <li><a href="#simulasi">Simulasi Angsuran</a></li>
-            <li><a href="#keunggulan">Standar Inspeksi</a></li>
-            <li><a href="#faq">Pusat Bantuan / FAQ</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Showroom & Kontak</h4>
-          <ul class="footer-links" style="color:var(--text-secondary);">
-            <li>📍 Jl. Imam Bonjol No. 207, Pendrikan Kidul, Semarang</li>
-            <li>📞 Hotline: (024) 865-9000</li>
-            <li>📱 WhatsApp: +62 812-3456-7890</li>
-            <li>⏰ Jam: Sen - Sab (08.00 - 18.00 WIB)</li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Berlangganan Promo</h4>
-          <p style="font-size:0.85rem; margin-bottom:1rem; color:var(--text-secondary);">
-            Dapatkan informasi diskon khusus dan peluncuran unit baru langsung di inbox Anda.
-          </p>
-          <form id="newsletterForm" style="display:flex; flex-direction:column; gap:0.6rem;">
-            <input 
-              type="email" 
-              id="newsletterEmail" 
-              class="form-input" 
-              placeholder="Masukkan email aktif..." 
-              required 
-            />
-            <button type="submit" class="btn-main-cta btn-interactive" style="height:44px; justify-content:center; font-size:0.9rem;">
-              Berlangganan
-            </button>
-          </form>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
+      <div class="footer-top-grid">
         <div>
-          © 2026 <strong>VELOCE AUTO</strong> — Dibuat untuk Tugas Akhir BTNG Kelas Frontend.
+          <div class="nav-brand" style="margin-bottom:0.75rem;">
+            <span>VELOCE <span style="color:var(--accent-blue-text);">AUTO</span></span>
+          </div>
+          <p style="line-height:1.6; font-size:0.85rem;">
+            Showroom dan portal e-commerce otomotif terverifikasi. Seluruh data mobil diambil secara dinamis dari API resmi Panitia BTNG 2026.
+          </p>
         </div>
-        <div style="font-size:0.85rem; color:var(--text-muted);">
-          Pengembang: <strong>Arkaan Taqiyyuddin Ilham Achmad Wijaya</strong>
+
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Navigasi</h4>
+          <ul class="footer-links-list">
+            <li><a href="#katalog">Katalog Mobil</a></li>
+            <li><a href="#simulasi">Simulasi Angsuran</a></li>
+            <li><a href="#inspeksi">Standar Inspeksi</a></li>
+            <li><a href="#kontak">Kontak Kami</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Lokasi Showroom</h4>
+          <p style="line-height:1.6; font-size:0.85rem; color:var(--text-muted);">
+            Jl. Imam Bonjol No. 207, Pendrikan Kidul, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50131
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Jam Layanan</h4>
+          <p style="line-height:1.6; font-size:0.85rem; color:var(--text-muted);">
+            Senin - Jumat: 08.00 - 18.00 WIB<br />
+            Sabtu: 08.00 - 15.00 WIB<br />
+            Minggu & Libur: Perjanjian
+          </p>
         </div>
       </div>
 
+      <div class="footer-credits-bar">
+        <div>© 2026 Veloce Auto — Tugas Akhir BTNG Kelas Frontend UKM DNCC.</div>
+        <div>Pengembang: <strong>Arkaan Taqiyyuddin Ilham Achmad Wijaya</strong></div>
+      </div>
     </div>
   </footer>
 
-  <!-- MODAL: CAR DETAIL & BOOKING -->
-  <div class="modal-backdrop" id="carDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalCarTitle">
-    <div class="modal-container">
-      <button class="modal-close-btn" aria-label="Tutup jendela">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
+  <!-- MODAL: CAR DETAIL & TEST DRIVE -->
+  <div class="modal-layer" id="carDetailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalName">
+    <div class="modal-dialog-box">
+      <button class="modal-btn-x" aria-label="Tutup jendela">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      <div class="modal-detail-grid">
-        
-        <div class="modal-image-col">
-          <img id="modalCarImg" src="" alt="Detail Mobil" class="modal-car-img" />
+      <div class="detail-modal-layout">
+        <div class="modal-visual-side">
+          <img id="detailModalImg" src="" alt="Foto Mobil" />
         </div>
 
-        <div class="modal-body">
-          <div class="modal-meta-row">
-            <span class="brand-tag" id="modalCarBrand">BRAND</span>
-            <span id="modalCarStatus" class="status-badge tersedia">Tersedia</span>
+        <div class="modal-info-side">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span id="detailModalBrand" style="font-size:0.8rem; font-weight:700; color:var(--accent-blue-text); text-transform:uppercase;">BRAND</span>
+            <span id="detailModalStatus" class="clean-badge available">Tersedia</span>
           </div>
 
-          <h2 class="modal-car-title" id="modalCarTitle">Nama Kendaraan</h2>
+          <h2 id="detailModalName" style="font-size:1.45rem;">Nama Mobil</h2>
 
-          <div class="modal-price-box">
-            <span class="price-label">Harga OTR Spesial</span>
-            <span class="modal-price-val" id="modalCarPrice">Rp 0</span>
-            <span style="font-size:0.82rem; color:var(--text-secondary);" id="modalCalcMonthly">Estimasi Cicilan: -</span>
+          <div style="background:var(--bg-surface-elevated); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0.85rem 1rem;">
+            <div style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Harga OTR</div>
+            <div id="detailModalPrice" style="font-size:1.6rem; font-weight:800; color:var(--text-main);">Rp 0</div>
+            <div id="detailModalCalc" style="font-size:0.8rem; color:#10b981; margin-top:2px;">Cicilan: -</div>
           </div>
 
-          <div class="modal-specs-grid">
-            <div class="modal-spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <div>
-                <div class="modal-spec-label">Tahun Rilis</div>
-                <div class="modal-spec-val" id="modalCarYear">-</div>
-              </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; font-size:0.85rem;">
+            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
+              <span style="color:var(--text-dim); font-size:0.75rem;">Tahun:</span>
+              <div id="detailModalYear" style="font-weight:700;">-</div>
             </div>
-
-            <div class="modal-spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M15 10h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V8l-3-3"/><line x1="3" y1="22" x2="15" y2="22"/></svg>
-              <div>
-                <div class="modal-spec-label">Bahan Bakar</div>
-                <div class="modal-spec-val" id="modalCarFuel">-</div>
-              </div>
+            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
+              <span style="color:var(--text-dim); font-size:0.75rem;">Bahan Bakar:</span>
+              <div id="detailModalFuel" style="font-weight:700;">-</div>
             </div>
-
-            <div class="modal-spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-              <div>
-                <div class="modal-spec-label">Transmisi</div>
-                <div class="modal-spec-val" id="modalCarTrans">-</div>
-              </div>
+            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
+              <span style="color:var(--text-dim); font-size:0.75rem;">Transmisi:</span>
+              <div id="detailModalTrans" style="font-weight:700;">-</div>
             </div>
-
-            <div class="modal-spec-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <div>
-                <div class="modal-spec-label">Garansi Mesin</div>
-                <div class="modal-spec-val">12 Bulan Resmi</div>
-              </div>
+            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
+              <span style="color:var(--text-dim); font-size:0.75rem;">Garansi:</span>
+              <div style="font-weight:700; color:#10b981;">12 Bulan Resmi</div>
             </div>
           </div>
 
-          <!-- Quick Test Drive Form -->
-          <form class="booking-form" id="modalBookingForm">
-            <h4 style="font-size:1.05rem; color:var(--text-heading);">Jadwalkan Test Drive / Konsultasi</h4>
-            
-            <input type="hidden" id="bookingCarName" value="" />
-
-            <div class="form-group">
-              <label for="bookingName" class="form-label">Nama Lengkap</label>
-              <input type="text" id="bookingName" class="form-input" placeholder="Masukkan nama Anda..." required />
-            </div>
-
-            <div class="form-group">
-              <label for="bookingPhone" class="form-label">Nomor WhatsApp Aktif</label>
-              <input type="tel" id="bookingPhone" class="form-input" placeholder="08xxxxxxxxxx" required />
-            </div>
-
-            <div class="form-group">
-              <label for="bookingDate" class="form-label">Pilih Tanggal Kunjungan</label>
-              <input type="date" id="bookingDate" class="form-input" required />
-            </div>
-
-            <button type="submit" class="btn-main-cta btn-interactive" style="width:100%; justify-content:center; margin-top:0.5rem;">
-              Konfirmasi Jadwal Test Drive
+          <!-- Quick Test Drive Schedule -->
+          <form id="testDriveForm" style="display:flex; flex-direction:column; gap:0.6rem; border-top:1px solid var(--border-default); padding-top:1rem;">
+            <input type="hidden" id="bookingCarTarget" value="" />
+            <span style="font-size:0.85rem; font-weight:700;">Jadwalkan Test Drive Langsung</span>
+            <input type="text" id="bookingCustName" placeholder="Nama Lengkap..." required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
+            <input type="tel" id="bookingCustPhone" placeholder="No. WhatsApp (08xxxx)..." required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
+            <input type="date" id="bookingCustDate" required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
+            <button type="submit" class="btn-chat-wa" style="width:100%; height:40px; margin-top:0.25rem;">
+              Konfirmasi Permintaan Test Drive
             </button>
           </form>
 
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- MODAL: WISHLIST / GARASI FAVORIT -->
-  <div class="modal-backdrop" id="wishlistModal" role="dialog" aria-modal="true" aria-labelledby="wishlistTitle">
-    <div class="modal-container" style="max-width:550px;">
-      <button class="modal-close-btn" aria-label="Tutup jendela favorit">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
+  <!-- MODAL: WISHLIST / MOBIL FAVORIT -->
+  <div class="modal-layer" id="wishlistModal" role="dialog" aria-modal="true" aria-labelledby="favTitle">
+    <div class="modal-dialog-box" style="max-width:500px;">
+      <button class="modal-btn-x" aria-label="Tutup jendela">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      <div style="padding:2rem;">
-        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-          <h3 id="wishlistTitle" style="font-size:1.4rem;">Garasi Mobil Impian Anda</h3>
-        </div>
+      <div style="padding:1.75rem;">
+        <h3 id="favTitle" style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          Mobil Favorit Tersimpan
+        </h3>
 
-        <div id="wishlistItemsList">
-          <!-- Populated dynamically via app.js -->
+        <div id="wishlistContainerList">
+          <!-- Populated by app.js -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TOAST CONTAINER -->
-  <div id="toastContainer" class="toast-container"></div>
+  <!-- MODAL: PERBANDINGAN 2 MOBIL -->
+  <div class="modal-layer" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareHeading">
+    <div class="modal-dialog-box wide">
+      <button class="modal-btn-x" aria-label="Tutup perbandingan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
 
-  <!-- JAVASCRIPT ENTRY POINT (Pure Vanilla JS) -->
+      <div class="comparison-table-view">
+        <div style="text-align:center;">
+          <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--accent-blue-text);">Komparasi Head-to-Head</span>
+          <h3 id="compareHeading" style="font-size:1.5rem; margin-top:2px;">Perbandingan Spesifikasi Kendaraan</h3>
+        </div>
+
+        <div class="compare-cols-wrap" id="compareColsWrap">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer"></div>
+
+  <!-- Pure Vanilla JS Entry Point -->
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
