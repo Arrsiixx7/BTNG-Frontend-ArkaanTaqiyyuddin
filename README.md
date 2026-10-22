@@ -1,7 +1,8 @@
 # 🏎️ VELOCE AUTO — Showroom & E-Commerce Mobil Terverifikasi
 > **Tugas Akhir BTNG Kelas Frontend — DNCC UDINUS 2026**  
 > Dibuat oleh: **Arkaan Taqiyyuddin Ilham Achmad Wijaya**  
-> Repository: `BTNG-Frontend-ArkaanTaqiyyuddin`
+> Repository: `BTNG-Frontend-ArkaanTaqiyyuddin`  
+> 🌐 **Live Demo Website**: [https://arrsiixx7.github.io/BTNG-Frontend-ArkaanTaqiyyuddin/](https://arrsiixx7.github.io/BTNG-Frontend-ArkaanTaqiyyuddin/)
 
 ---
 
