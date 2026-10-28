@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Veloce Auto - Showroom & E-Commerce Mobil Premium. Tugas Akhir BTNG Kelas Frontend DNCC Udinus 2026." />
   <meta name="author" content="Arkaan Taqiyyuddin Ilham Achmad Wijaya" />
-  <title>Veloce Auto — Showroom & Katalog Mobil Terverifikasi</title>
+  <title>Veloce Auto — The Grand Tourer Digital Exhibition</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans, Outfit, & JetBrains Mono -->
+  <!-- Google Fonts: Plus Jakarta Sans (Extra Bold Headings & Regular Body) & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
   <!-- Favicon SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2'/><circle cx='7' cy='17' r='2'/><path d='M9 17h6'/><circle cx='17' cy='17' r='2'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c3a091'><path d='M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2'/><circle cx='7' cy='17' r='2'/><path d='M9 17h6'/><circle cx='17' cy='17' r='2'/></svg>" />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
@@ -22,49 +22,41 @@
 </head>
 <body>
 
-  <!-- SITE NAVIGATION -->
-  <nav class="site-nav">
-    <div class="container nav-wrapper">
+  <!-- FLOATING CAPSULE COCKPIT NAVIGATION (Inspired by Reference 1) -->
+  <header class="floating-nav-container">
+    <nav class="capsule-nav" aria-label="Navigasi Utama Veloce Auto">
       
-      <!-- Brand Logo -->
-      <a href="#katalog" class="nav-brand" aria-label="Veloce Auto">
-        <div class="brand-icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3c-.1.2-.1.5-.1.8v4.3c0 .6.4 1 1 1h2"></path>
-            <circle cx="7" cy="17" r="2"></circle>
-            <path d="M9 17h6"></path>
-            <circle cx="17" cy="17" r="2"></circle>
-          </svg>
-        </div>
-        <span>VELOCE <span style="color:var(--accent-blue-text);">AUTO</span></span>
+      <!-- Brand Monogram -->
+      <a href="#katalog" class="capsule-brand" aria-label="Veloce Auto Beranda">
+        <span class="brand-title">VELOCE <span class="brand-accent">AUTO</span></span>
       </a>
 
-      <!-- Navigation Links -->
-      <ul class="nav-links-list" id="navMenu">
-        <li><a href="#katalog" class="nav-item-link active">Katalog Mobil</a></li>
-        <li><a href="#simulasi" class="nav-item-link">Simulasi Kredit</a></li>
-        <li><a href="#inspeksi" class="nav-item-link">Standar Inspeksi</a></li>
-        <li><a href="#kontak" class="nav-item-link">Kontak Showroom</a></li>
+      <!-- Navigation Capsule Links -->
+      <ul class="capsule-menu" id="navMenu">
+        <li><a href="#katalog" class="capsule-link active">KATALOG</a></li>
+        <li><a href="#simulasi" class="capsule-link">SIMULASI</a></li>
+        <li><a href="#inspeksi" class="capsule-link">INSPEKSI</a></li>
+        <li><a href="#kontak" class="capsule-link">KONTAK</a></li>
       </ul>
 
-      <!-- Action Buttons -->
-      <div class="nav-right-actions">
-        <!-- Wishlist / Favorit -->
-        <button class="nav-btn-icon" id="wishlistBtn" aria-label="Mobil Favorit" title="Lihat Favorit">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Action Utilities -->
+      <div class="capsule-actions">
+        <!-- Wishlist / Favorit Button -->
+        <button class="capsule-btn-icon" id="wishlistBtn" aria-label="Mobil Favorit" title="Lihat Mobil Favorit">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
-          <span class="nav-badge-pill" id="wishlistBadge" style="display:none;">0</span>
+          <span class="capsule-badge" id="wishlistBadge" style="display:none;">0</span>
         </button>
 
         <!-- Theme Switcher -->
-        <button class="nav-btn-icon" id="themeToggleBtn" aria-label="Ganti Tema" title="Ganti Mode Tampilan">
+        <button class="capsule-btn-icon" id="themeToggleBtn" aria-label="Ganti Tema" title="Ganti Mode Tampilan">
           <!-- Populated by JS -->
         </button>
 
-        <!-- Mobile Menu Toggle -->
-        <button class="nav-btn-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Mobile Menu Toggle Button -->
+        <button class="capsule-btn-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu Navigasi">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -72,53 +64,94 @@
         </button>
       </div>
 
-    </div>
-  </nav>
-
-  <!-- HERO / BANNER HEADER -->
-  <header class="hero-wrapper">
-    <div class="container">
-      <div class="hero-header-row">
-        
-        <div class="hero-text-block">
-          <div class="hero-pill-tag">
-            <span>●</span>
-            Katalog Resmi BTNG DNCC 2026
-          </div>
-          <h1 class="hero-main-title">
-            Koleksi Mobil Pilihan & Terverifikasi
-          </h1>
-          <p class="hero-subtitle">
-            Pilihan armada baru dan bekas berkualitas tinggi. Cek ketersediaan secara real-time, simulasi cicilan pembiayaan, atau hubungi konsultan kami via WhatsApp.
-          </p>
-        </div>
-
-        <div class="hero-meta-badges">
-          <div class="meta-metric-card">
-            <span class="metric-val" id="metaTotalUnits">12</span>
-            <span class="metric-label">Total Unit</span>
-          </div>
-          <div class="meta-metric-card">
-            <span class="metric-val" style="color:#10b981;" id="metaAvailUnits">10</span>
-            <span class="metric-label">Unit Tersedia</span>
-          </div>
-          <div class="meta-metric-card">
-            <span class="metric-val" id="metaBrandsCount">9</span>
-            <span class="metric-label">Brand Pilihan</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- MAIN CONTENT AREA -->
-  <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+  <!-- CINEMATIC EXHIBITION STAGE HERO (Futuristic Atelier Showroom) -->
+  <section class="hero-exhibition-stage">
+    
+    <!-- Overhead Geometric Ceiling Lighting -->
+    <div class="hero-ceiling-lights" aria-hidden="true"></div>
 
-    <!-- CAR CATALOG & QUICK CONTROLS -->
+    <!-- Floor Reflective Light Ring -->
+    <div class="hero-floor-ring" aria-hidden="true"></div>
+
+    <!-- Glass Panel Signage (Image #8) -->
+    <div class="hero-glass-signage" aria-hidden="true">
+      —<br />
+      SHOWROOM<br />
+      — ATELIER VELOCE —
+    </div>
+
+    <!-- Giant Backdrop Watermark -->
+    <div class="hero-watermark-text" aria-hidden="true">VELOCE</div>
+
+    <div class="container hero-inner-container">
+      
+      <div class="hero-editorial-block">
+        <h1 class="hero-main-title">
+          <span class="title-bold">THE ANATOMY OF </span>
+          <span class="title-cyan">VELOCITY</span>
+        </h1>
+
+        <p class="hero-editorial-desc">
+          Kurasi armada kendaraan performa tinggi dan eksklusif. Seluruh unit terverifikasi melalui inspeksi 175-titik menyeluruh, transparansi dokumen legal resmi, dan simulasi pembiayaan instan.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#katalog" class="btn-hero-primary">
+            Jelajahi Showroom ↓
+          </a>
+          <a href="#simulasi" class="btn-hero-secondary">
+            Simulasi Pembiayaan
+          </a>
+        </div>
+      </div>
+
+      <!-- Telemetry Spec HUD Bar (Tesla Model S & AMG GT3 Style) -->
+      <div class="hero-telemetry-hud-card">
+        <div class="telemetry-hud-item">
+          <div class="telemetry-num" id="metaTotalUnits">12</div>
+          <div class="telemetry-label">Total Unit Pilihan</div>
+          <div class="telemetry-sub">Armada Aktif</div>
+        </div>
+
+        <div class="telemetry-hud-item">
+          <div class="telemetry-num" id="metaAvailUnits" style="color:var(--status-available-text);">10</div>
+          <div class="telemetry-label">Unit Tersedia</div>
+          <div class="telemetry-sub">Siap Kirim OTR</div>
+        </div>
+
+        <div class="telemetry-hud-item">
+          <div class="telemetry-num" id="metaBrandsCount">9</div>
+          <div class="telemetry-label">Merk Terdaftar</div>
+          <div class="telemetry-sub">Jepang & Eropa</div>
+        </div>
+
+        <div class="telemetry-hud-item">
+          <div class="telemetry-num" style="color:var(--accent-cognac);">175</div>
+          <div class="telemetry-label">Titik Inspeksi</div>
+          <div class="telemetry-sub">Garansi Bebas Banjir</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN CATALOG CONTENT -->
+  <main class="container" style="padding-top: 2rem; padding-bottom: 5rem;">
+
+    <!-- CAR CATALOG & FILTER DECK -->
     <section id="katalog">
       
-      <!-- Unified Control Bar -->
+      <!-- Section Header -->
+      <div class="section-title-wrap">
+        <div class="section-tagline">Koleksi Terverifikasi</div>
+        <h2 class="section-h2">Showroom Floor & Katalog Unit</h2>
+        <p style="color:var(--text-muted); font-size:0.95rem;">Filter berdasarkan tipe mesin, transmisi, harga, atau gunakan pencarian cerdas.</p>
+      </div>
+
+      <!-- Telemetry Control Station (Interactive Filtering Deck) -->
       <div class="controls-card">
         
         <!-- Primary Row: Search & Fuel Category Chips -->
@@ -132,7 +165,7 @@
               type="text" 
               id="searchInput" 
               class="search-input-field" 
-              placeholder="Cari mobil berdasarkan nama atau brand (e.g. BYD, Fortuner, Civic)..." 
+              placeholder="Cari unit mobil (e.g. Civic Type R, Avanza, Porsche, BYD)..." 
               autocomplete="off"
             />
             <kbd class="search-kbd" id="searchKbd" title="Tekan tombol '/' untuk langsung mencari">/</kbd>
@@ -144,7 +177,7 @@
             </button>
           </div>
 
-          <!-- Fuel Chips -->
+          <!-- Fuel Category Filter Chips -->
           <div class="fuel-chips-wrapper">
             <button class="chip-btn active" data-fuel="all" type="button">
               Semua <span class="chip-count">(12)</span>
@@ -164,7 +197,7 @@
           </div>
         </div>
 
-        <!-- Secondary Row: Brand, Transmisi, Status & Sort -->
+        <!-- Secondary Row: Brand, Transmisi, Status, Sort & Reset -->
         <div class="controls-secondary-bar">
           <div class="dropdown-group">
             
@@ -215,9 +248,9 @@
 
       </div>
 
-      <!-- Status Count & Active Filters Bar -->
+      <!-- Results Count & Active Filter Tags Bar -->
       <div class="results-status-bar">
-        <span id="resultsCount">Memuat armada mobil...</span>
+        <span id="resultsCount">Mengambil data dari server API...</span>
         <div class="active-filters-deck" id="activeFiltersDeck"></div>
       </div>
 
@@ -231,12 +264,12 @@
     <!-- FLOATING BAR: COMPARE CARS -->
     <aside class="floating-compare-bar" id="floatingCompareBar">
       <div class="compare-bar-info">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue-text)" stroke-width="2"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cognac)" stroke-width="2"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
         <span id="compareCountText">0/2 Mobil Terpilih</span>
       </div>
       <div style="display:flex; align-items:center; gap:0.75rem;">
         <button class="btn-launch-compare" id="btnLaunchCompare" type="button">
-          Bandingkan Sekarang
+          Bandingkan Spesifikasi
         </button>
         <button class="btn-clear-compare" id="btnClearCompare" type="button">
           Batal
@@ -244,45 +277,46 @@
       </div>
     </aside>
 
-    <!-- CREDIT SIMULATOR SECTION -->
-    <section id="simulasi" class="simulator-section" style="margin-top: 4rem; border-radius: var(--r-lg);">
-      <div class="container">
+    <!-- INTERACTIVE CREDIT & LOAN ANALYTICS CALCULATOR (Inspired by Reference 7) -->
+    <section id="simulasi" class="simulator-section">
+      <div>
         
         <div class="section-title-wrap">
-          <div class="section-tagline">Pembiayaan Transparan</div>
-          <h2 class="section-h2">Simulasi Angsuran Bulanan</h2>
-          <p style="color:var(--text-muted); font-size:0.95rem;">Hitung perkiraan angsuran kredit dengan uang muka dan tenor yang dapat disesuaikan.</p>
+          <div class="section-tagline">Financial Precision & Transparency</div>
+          <h2 class="section-h2">Simulasi Angsuran & Pembiayaan</h2>
+          <p style="color:var(--text-muted); font-size:0.95rem;">Rencanakan kepemilikan armada impian dengan kalkulator bunga transparan dan komparasi pasar.</p>
         </div>
 
-        <div class="sim-container-card">
+        <div class="calc-master-container">
           
-          <div class="sim-form-col">
+          <!-- Left Column: Input Form Card -->
+          <div class="calc-input-card">
             
-            <div class="sim-field-group">
-              <label for="calcCarSelect" class="sim-field-label">Pilih Unit Mobil</label>
+            <div class="calc-field-group">
+              <label for="calcCarSelect" class="calc-field-label">PILIH UNIT KENDARAAN</label>
               <div class="select-wrapper-box" style="width:100%;">
-                <select id="calcCarSelect" class="native-select" style="height:42px;">
+                <select id="calcCarSelect" class="native-select" style="height:46px;">
                   <!-- Populated dynamically via JS -->
                 </select>
                 <svg class="select-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
             </div>
 
-            <div class="sim-field-group">
-              <div class="sim-field-label">
-                <span>Uang Muka (Down Payment / DP)</span>
-                <span id="calcDpValue" style="color:var(--accent-blue-text);">20%</span>
+            <div class="calc-field-group">
+              <div class="calc-field-label-row">
+                <span>UANG MUKA (DOWN PAYMENT)</span>
+                <span id="calcDpValue" class="calc-val-badge">20%</span>
               </div>
               <input type="range" id="calcDpRange" class="sim-range-slider" min="15" max="60" step="5" value="20" />
-              <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim); margin-top:2px;">
+              <div class="slider-ticks-row">
                 <span>Min 15%</span>
                 <span>Standar 20% - 30%</span>
                 <span>Maks 60%</span>
               </div>
             </div>
 
-            <div class="sim-field-group">
-              <label class="sim-field-label">Pilihan Tenor Cicilan</label>
+            <div class="calc-field-group">
+              <label class="calc-field-label">PILIHAN TENOR ANGSURAN</label>
               <div class="tenor-button-group" id="calcTenorPills">
                 <button type="button" class="tenor-choice-btn" data-tenor="12">12 Bln</button>
                 <button type="button" class="tenor-choice-btn" data-tenor="24">24 Bln</button>
@@ -292,39 +326,77 @@
               </div>
             </div>
 
-          </div>
-
-          <!-- Simulation Output -->
-          <div class="sim-summary-col">
-            <div>
-              <div class="sim-calc-head">
-                <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-dim); font-weight:700; letter-spacing:0.04em;">Estimasi Cicilan per Bulan</span>
-                <div class="sim-installment-figure" id="calcResultMonthly">Rp 0 / bln</div>
-              </div>
-
-              <div class="sim-table-rows">
-                <div class="sim-row">
-                  <span>Nominal Uang Muka (DP):</span>
-                  <span id="calcResultDp">Rp 0</span>
-                </div>
-                <div class="sim-row">
-                  <span>Pokok Pembiayaan:</span>
-                  <span id="calcResultPrincipal">Rp 0</span>
-                </div>
-                <div class="sim-row">
-                  <span>Suku Bunga Flat Acuan:</span>
-                  <span>5.5% / tahun</span>
-                </div>
-                <div class="sim-row" style="border-top:1px dashed var(--border-default); padding-top:0.6rem;">
-                  <span>Total Pengeluaran:</span>
-                  <span id="calcResultTotal" style="color:var(--text-main);">Rp 0</span>
-                </div>
+            <!-- Warm Gold Callout Banner (Ref 7 Info Banner) -->
+            <div class="calc-info-callout">
+              <div class="callout-icon">ⓘ</div>
+              <div class="callout-text">
+                <strong>Status Pembiayaan: Program Prioritas BTNG.</strong> 
+                Nikmati suku bunga flat 5.5% p.a., persetujuan kilat 1x24 jam, dan perlindungan asuransi All-Risk penuh selama masa tenor.
               </div>
             </div>
 
-            <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20tertarik%20mengajukan%20simulasi%20kredit%20mobil." target="_blank" class="btn-chat-wa" style="width:100%; height:44px;">
-              Konsultasi Pengajuan via WhatsApp
+          </div>
+
+          <!-- Right Column: Suggested Output & Market Comparison Card (Ref 7) -->
+          <div class="calc-output-card">
+            
+            <!-- Top Dark Hero Rate Card -->
+            <div class="suggested-rate-hero">
+              <div class="suggested-rate-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                <span>ESTIMASI ANGSURAN BULANAN</span>
+              </div>
+              <div class="suggested-rate-val" id="calcResultMonthly">Rp 0 <span class="rate-sub">/ bln</span></div>
+              <p class="suggested-rate-caption">Perhitungan simulasi suku bunga efektif flat 5.5% per tahun.</p>
+            </div>
+
+            <!-- Financial Breakdown Table -->
+            <div class="calc-table-breakdown">
+              <div class="calc-breakdown-row">
+                <span class="breakdown-label">Nominal Uang Muka (DP):</span>
+                <span class="breakdown-val" id="calcResultDp">Rp 0 (20%)</span>
+              </div>
+              <div class="calc-breakdown-row">
+                <span class="breakdown-label">Pokok Pembiayaan Kredit:</span>
+                <span class="breakdown-val" id="calcResultPrincipal">Rp 0</span>
+              </div>
+              <div class="calc-breakdown-row">
+                <span class="breakdown-label">Suku Bunga Acuan:</span>
+                <span class="breakdown-val" style="color:var(--status-available-text);">5.5% Flat / Tahun</span>
+              </div>
+              <div class="calc-breakdown-row total-highlight">
+                <span class="breakdown-label">Total Pembayaran Akhir:</span>
+                <span class="breakdown-val" id="calcResultTotal" style="color:var(--text-main);">Rp 0</span>
+              </div>
+            </div>
+
+            <!-- Market Comparison Range Slider (Ref 7 Inspired) -->
+            <div class="market-comparison-deck">
+              <div class="comparison-deck-header">
+                <span>Rasio Beban Pembiayaan</span>
+                <span class="comparison-badge-tag" id="calcTierBadge">Optimal (Tier A)</span>
+              </div>
+
+              <div class="market-gradient-bar-wrapper">
+                <div class="market-gradient-track"></div>
+                <!-- Interactive Pin Marker labeled "YOU" -->
+                <div class="market-you-pin" id="calcYouPin" style="left: 35%;">
+                  <span class="you-badge-text">YOU</span>
+                  <div class="pin-stem"></div>
+                </div>
+              </div>
+
+              <div class="market-scale-legend">
+                <span>Ringan (15% DP)</span>
+                <span>Rekomendasi (20-30%)</span>
+                <span>Hemat Bunga (50%+)</span>
+              </div>
+            </div>
+
+            <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20ingin%20berkonsultasi%20mengenai%20simulasi%20pembiayaan%20kredit%20mobil." target="_blank" rel="noopener noreferrer" class="btn-chat-wa" style="width:100%; height:46px; margin-top:1.25rem;">
+              Ajukan Konsultasi Pembiayaan via WhatsApp
             </a>
+
           </div>
 
         </div>
@@ -332,7 +404,7 @@
       </div>
     </section>
 
-    <!-- STANDARDS & INSPECTION SECTION -->
+    <!-- 4 STANDARDS & INSPECTION SECTION -->
     <section id="inspeksi" class="standards-section">
       <div class="section-title-wrap">
         <div class="section-tagline">Jaminan Transaksi Aman</div>
@@ -343,14 +415,14 @@
       <div class="standards-grid">
         <div class="standard-card">
           <span class="standard-num">01</span>
-          <h3>Uji Fisik & Mesin Bebas Masalah</h3>
-          <p>Pemeriksaan menyeluruh pada kompresi ruang bakar, sistem pengereman ABS, fluida, dan kelistrikan komputer.</p>
+          <h3>Uji Fisik & Kompresi Mesin</h3>
+          <p>Pemeriksaan menyeluruh pada kompresi ruang bakar, sistem pengereman ABS, fluida, dan kelistrikan komputer ECU.</p>
         </div>
 
         <div class="standard-card">
           <span class="standard-num">02</span>
           <h3>Garansi Bebas Banjir & Tabrakan</h3>
-          <p>Inspeksi pilar sasis dan apron depan menjamin kendaraan tidak pernah mengalami kecelakaan berat atau terendam air.</p>
+          <p>Inspeksi pilar sasis dan apron depan menjamin kendaraan tidak pernah mengalami kecelakaan berat atau terendam banjir.</p>
         </div>
 
         <div class="standard-card">
@@ -362,20 +434,20 @@
         <div class="standard-card">
           <span class="standard-num">04</span>
           <h3>Layanan Antar Unit ke Rumah</h3>
-          <p>Pengantaran unit langsung ke depan pintu rumah Anda dengan towing tertutup dan asuransi perjalanan lengkap.</p>
+          <p>Pengantaran unit langsung ke depan pintu rumah Anda dengan armada towing tertutup dan perlindungan asuransi penuh.</p>
         </div>
       </div>
     </section>
 
     <!-- CONTACT SHOWROOM -->
-    <section id="kontak" style="margin-top:2rem; padding:2rem; background:var(--bg-surface); border:1px solid var(--border-default); border-radius:var(--r-md); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
+    <section id="kontak" class="contact-cta-card">
       <div>
-        <h3 style="font-size:1.35rem; margin-bottom:0.25rem;">Punya Pertanyaan Seputar Unit Mobil?</h3>
-        <p style="color:var(--text-muted); font-size:0.92rem;">Showroom kami buka Senin - Sabtu (08.00 - 18.00 WIB). Kunjungi langsung atau hubungi tim sales online.</p>
+        <h3 style="font-size:1.35rem; margin-bottom:0.35rem; font-family:var(--font-heading);">Punya Pertanyaan Seputar Unit Mobil?</h3>
+        <p style="color:var(--text-muted); font-size:0.92rem;">Showroom kami buka Senin - Sabtu (08.00 - 18.00 WIB). Kunjungi langsung di Semarang atau hubungi tim sales online kami.</p>
       </div>
-      <div style="display:flex; gap:0.75rem;">
-        <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20ingin%20bertanya%20mengenai%20katalog%20mobil." target="_blank" rel="noopener noreferrer" class="btn-chat-wa" style="height:42px; padding:0 1.25rem;">
-          Hubungi WhatsApp (+62 812-3456-7890)
+      <div>
+        <a href="https://wa.me/6281234567890?text=Halo%20Veloce%20Auto,%20saya%20ingin%20bertanya%20mengenai%20katalog%20mobil." target="_blank" rel="noopener noreferrer" class="btn-chat-wa" style="height:44px; padding:0 1.5rem;">
+          Hubungi Konsultan via WhatsApp
         </a>
       </div>
     </section>
@@ -387,49 +459,49 @@
     <div class="container">
       <div class="footer-top-grid">
         <div>
-          <div class="nav-brand" style="margin-bottom:0.75rem;">
-            <span>VELOCE <span style="color:var(--accent-blue-text);">AUTO</span></span>
+          <div class="capsule-brand" style="margin-bottom:0.75rem; display:inline-flex;">
+            <span class="brand-title">VELOCE <span class="brand-accent">AUTO</span></span>
           </div>
-          <p style="line-height:1.6; font-size:0.85rem;">
-            Showroom dan portal e-commerce otomotif terverifikasi. Seluruh data mobil diambil secara dinamis dari API resmi Panitia BTNG 2026.
+          <p style="line-height:1.6; font-size:0.85rem; color:var(--text-muted); max-width:340px;">
+            The Grand Tourer Digital Exhibition — Showroom dan portal katalog mobil premium terverifikasi tugas akhir BTNG 2026.
           </p>
         </div>
 
         <div>
-          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Navigasi</h4>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem; font-family:var(--font-heading);">Navigasi</h4>
           <ul class="footer-links-list">
             <li><a href="#katalog">Katalog Mobil</a></li>
-            <li><a href="#simulasi">Simulasi Angsuran</a></li>
-            <li><a href="#inspeksi">Standar Inspeksi</a></li>
-            <li><a href="#kontak">Kontak Kami</a></li>
+            <li><a href="#simulasi">Simulasi Pembiayaan</a></li>
+            <li><a href="#inspeksi">Standar 175-Titik</a></li>
+            <li><a href="#kontak">Kontak Showroom</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Lokasi Showroom</h4>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem; font-family:var(--font-heading);">Lokasi Showroom</h4>
           <p style="line-height:1.6; font-size:0.85rem; color:var(--text-muted);">
             Jl. Imam Bonjol No. 207, Pendrikan Kidul, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50131
           </p>
         </div>
 
         <div>
-          <h4 style="font-size:0.95rem; margin-bottom:0.85rem;">Jam Layanan</h4>
+          <h4 style="font-size:0.95rem; margin-bottom:0.85rem; font-family:var(--font-heading);">Jam Operasional</h4>
           <p style="line-height:1.6; font-size:0.85rem; color:var(--text-muted);">
             Senin - Jumat: 08.00 - 18.00 WIB<br />
             Sabtu: 08.00 - 15.00 WIB<br />
-            Minggu & Libur: Perjanjian
+            Minggu & Hari Libur: Perjanjian Khusus
           </p>
         </div>
       </div>
 
       <div class="footer-credits-bar">
         <div>© 2026 Veloce Auto — Tugas Akhir BTNG Kelas Frontend UKM DNCC.</div>
-        <div>Pengembang: <strong>Arkaan Taqiyyuddin Ilham Achmad Wijaya</strong></div>
+        <div>Pengembang: <strong>Arkaan Taqiyyuddin Ilham Achmad Wijaya</strong> (A11.2026.16805)</div>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL: CAR DETAIL & TEST DRIVE -->
+  <!-- MODAL: CAR DETAIL & 175-POINT INSPECTION SHEET -->
   <div class="modal-layer" id="carDetailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalName">
     <div class="modal-dialog-box">
       <button class="modal-btn-x" aria-label="Tutup jendela">
@@ -438,50 +510,51 @@
 
       <div class="detail-modal-layout">
         <div class="modal-visual-side">
+          <div class="modal-stage-cone"></div>
           <img id="detailModalImg" src="" alt="Foto Mobil" />
         </div>
 
         <div class="modal-info-side">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span id="detailModalBrand" style="font-size:0.8rem; font-weight:700; color:var(--accent-blue-text); text-transform:uppercase;">BRAND</span>
-            <span id="detailModalStatus" class="clean-badge available">Tersedia</span>
+            <span id="detailModalBrand" class="modal-brand-tag">BRAND</span>
+            <span id="detailModalStatus" style="display:none;"></span>
           </div>
 
-          <h2 id="detailModalName" style="font-size:1.45rem;">Nama Mobil</h2>
+          <h2 id="detailModalName" class="modal-title-heading">Nama Mobil</h2>
 
-          <div style="background:var(--bg-surface-elevated); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0.85rem 1rem;">
-            <div style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase;">Harga OTR</div>
-            <div id="detailModalPrice" style="font-size:1.6rem; font-weight:800; color:var(--text-main);">Rp 0</div>
-            <div id="detailModalCalc" style="font-size:0.8rem; color:#10b981; margin-top:2px;">Cicilan: -</div>
+          <div class="modal-price-card">
+            <div class="modal-price-label">Harga OTR Resmi</div>
+            <div id="detailModalPrice" class="modal-price-figure">Rp 0</div>
+            <div id="detailModalCalc" class="modal-installment-tag">Cicilan: -</div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; font-size:0.85rem;">
-            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
-              <span style="color:var(--text-dim); font-size:0.75rem;">Tahun:</span>
-              <div id="detailModalYear" style="font-weight:700;">-</div>
+          <div class="modal-spec-grid">
+            <div class="spec-cell">
+              <span class="spec-cell-label">Tahun Perakitan</span>
+              <div id="detailModalYear" class="spec-cell-val">-</div>
             </div>
-            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
-              <span style="color:var(--text-dim); font-size:0.75rem;">Bahan Bakar:</span>
-              <div id="detailModalFuel" style="font-weight:700;">-</div>
+            <div class="spec-cell">
+              <span class="spec-cell-label">Tipe Bahan Bakar</span>
+              <div id="detailModalFuel" class="spec-cell-val">-</div>
             </div>
-            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
-              <span style="color:var(--text-dim); font-size:0.75rem;">Transmisi:</span>
-              <div id="detailModalTrans" style="font-weight:700;">-</div>
+            <div class="spec-cell">
+              <span class="spec-cell-label">Sistem Transmisi</span>
+              <div id="detailModalTrans" class="spec-cell-val">-</div>
             </div>
-            <div style="background:var(--bg-input); padding:0.6rem 0.75rem; border-radius:var(--r-sm); border:1px solid var(--border-default);">
-              <span style="color:var(--text-dim); font-size:0.75rem;">Garansi:</span>
-              <div style="font-weight:700; color:#10b981;">12 Bulan Resmi</div>
+            <div class="spec-cell">
+              <span class="spec-cell-label">Sertifikasi & Garansi</span>
+              <div class="spec-cell-val" style="color:var(--status-available-text);">175 Titik Lolos (1 Th)</div>
             </div>
           </div>
 
-          <!-- Quick Test Drive Schedule -->
-          <form id="testDriveForm" style="display:flex; flex-direction:column; gap:0.6rem; border-top:1px solid var(--border-default); padding-top:1rem;">
+          <!-- Quick Test Drive Schedule Form -->
+          <form id="testDriveForm" class="modal-booking-form">
             <input type="hidden" id="bookingCarTarget" value="" />
-            <span style="font-size:0.85rem; font-weight:700;">Jadwalkan Test Drive Langsung</span>
-            <input type="text" id="bookingCustName" placeholder="Nama Lengkap..." required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
-            <input type="tel" id="bookingCustPhone" placeholder="No. WhatsApp (08xxxx)..." required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
-            <input type="date" id="bookingCustDate" required style="height:38px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--r-sm); padding:0 0.75rem; font-size:0.85rem;" />
-            <button type="submit" class="btn-chat-wa" style="width:100%; height:40px; margin-top:0.25rem;">
+            <span class="form-section-title">Jadwalkan Sesi Uji Jalan (Test Drive)</span>
+            <input type="text" id="bookingCustName" placeholder="Nama Lengkap Pemohon..." required class="modal-input-field" />
+            <input type="tel" id="bookingCustPhone" placeholder="No. WhatsApp Aktif (08xxxx)..." required class="modal-input-field" />
+            <input type="date" id="bookingCustDate" required class="modal-input-field" />
+            <button type="submit" class="btn-chat-wa" style="width:100%; height:44px; margin-top:0.35rem;">
               Konfirmasi Permintaan Test Drive
             </button>
           </form>
@@ -493,15 +566,15 @@
 
   <!-- MODAL: WISHLIST / MOBIL FAVORIT -->
   <div class="modal-layer" id="wishlistModal" role="dialog" aria-modal="true" aria-labelledby="favTitle">
-    <div class="modal-dialog-box" style="max-width:500px;">
+    <div class="modal-dialog-box" style="max-width:520px;">
       <button class="modal-btn-x" aria-label="Tutup jendela">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
       <div style="padding:1.75rem;">
-        <h3 id="favTitle" style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
+        <h3 id="favTitle" style="font-size:1.25rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem; font-family:var(--font-heading);">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-          Mobil Favorit Tersimpan
+          Koleksi Mobil Favorit Tersimpan
         </h3>
 
         <div id="wishlistContainerList">
@@ -519,9 +592,9 @@
       </button>
 
       <div class="comparison-table-view">
-        <div style="text-align:center;">
-          <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--accent-blue-text);">Komparasi Head-to-Head</span>
-          <h3 id="compareHeading" style="font-size:1.5rem; margin-top:2px;">Perbandingan Spesifikasi Kendaraan</h3>
+        <div class="compare-head-block">
+          <span class="compare-subtitle">KOMPARASI HEAD-TO-HEAD</span>
+          <h3 id="compareHeading" class="compare-title">Perbandingan Spesifikasi Kendaraan</h3>
         </div>
 
         <div class="compare-cols-wrap" id="compareColsWrap">

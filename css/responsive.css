@@ -1,53 +1,214 @@
 /* ==========================================================================
    VELOCE AUTO — RESPONSIVE STYLES
-   Mobile (< 640px), Tablet (640px - 1024px), Desktop
+   Breakpoints: Desktop (>1024px) | Tablet (641–1024px) | Mobile (≤640px)
    ========================================================================== */
 
+/* ==========================================================================
+   TABLET — max-width: 1024px
+   ========================================================================== */
 @media (max-width: 1024px) {
-  .hero-header-row {
-    flex-direction: column;
-    align-items: flex-start;
+
+  /* --- Hero --- */
+  .hero-telemetry-hud-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
   }
 
-  .sim-container-card {
+  .telemetry-hud-divider {
+    display: none;
+  }
+
+  .telemetry-hud-item:nth-child(2) {
+    border-right: none;
+  }
+
+  /* --- Simulator --- */
+  .calc-master-container {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* --- Standards Grid: 2 columns on tablet --- */
+  .standards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --- Footer: 2-col layout --- */
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
-  .footer-top-grid {
-    grid-template-columns: 1fr 1fr;
+  /* --- Modal comparison: single column --- */
+  .compare-cols-wrap {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .compare-cols-wrap::after {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
+/* ==========================================================================
+   TABLET SMALL / LARGE MOBILE — max-width: 768px
+   ========================================================================== */
 @media (max-width: 768px) {
-  .mobile-menu-btn {
-    display: flex;
+
+  /* --- Navbar --- */
+  .floating-nav-container {
+    top: 0.5rem;
+    padding: 0 0.75rem;
   }
 
-  .nav-links-list {
+  .capsule-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  /* Mobile dropdown menu */
+  .capsule-menu {
     position: fixed;
-    top: var(--nav-h);
-    left: 0;
-    right: 0;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-default);
+    top: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+    background: rgba(17, 21, 34, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-md);
     flex-direction: column;
-    padding: 1.5rem;
-    gap: 1.25rem;
+    padding: 0.75rem;
+    gap: 0.35rem;
     transform: translateY(-120%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
     box-shadow: var(--shadow-floating);
-    z-index: 99;
+    z-index: 1000;
   }
 
-  .nav-links-list.open {
+  .capsule-menu.open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
 
+  .capsule-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    border-radius: var(--r-sm);
+  }
+
+  /* Light mode: mobile dropdown */
+  [data-theme='light'] .capsule-menu {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: #d0d9e8;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  }
+
+  /* --- Hero --- */
+  .hero-exhibition-stage {
+    padding-top: 3.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-inner-container {
+    gap: 2.5rem;
+  }
+
+  .hero-main-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 0.65rem;
+    align-items: stretch;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-glass-signage {
+    display: none;
+  }
+
+  /* --- Controls Card --- */
+  .controls-primary-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .fuel-chips-wrapper {
+    width: 100%;
+    padding-bottom: 0.35rem;
+    /* hide scrollbar but keep scroll */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .fuel-chips-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .controls-secondary-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .dropdown-group {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .select-wrapper-box {
+    flex: 1;
+    min-width: calc(50% - 0.25rem);
+  }
+
+  .native-select {
+    width: 100%;
+  }
+
+  .btn-reset-clean {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* --- Results bar --- */
+  .results-status-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+  }
+
+  /* --- Car Cards --- */
+  .card-actions-grid {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  /* --- Modals --- */
   .detail-modal-layout {
     grid-template-columns: 1fr;
   }
@@ -57,49 +218,270 @@
     min-height: auto;
   }
 
+  .modal-info-side {
+    padding: 1.25rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .modal-spec-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal-dialog-box {
+    max-height: 95vh;
+  }
+
+  /* --- Comparison --- */
   .compare-cols-wrap {
     grid-template-columns: 1fr;
   }
 
-  .controls-primary-bar {
-    flex-direction: column;
-    align-items: stretch;
+  .compare-cols-wrap::after {
+    display: none;
   }
 
-  .controls-secondary-bar {
-    flex-direction: column;
-    align-items: stretch;
+  .comparison-table-view {
+    padding: 1.25rem;
+    gap: 1rem;
   }
 
-  .dropdown-group {
+  /* --- Simulator --- */
+  .market-scale-legend {
+    font-size: 0.65rem;
+    gap: 0.25rem;
+  }
+
+  /* --- Standards --- */
+  .standards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* --- Contact CTA --- */
+  .contact-cta-card {
+    padding: 1.75rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .contact-cta-card .btn-chat-wa {
     width: 100%;
+    justify-content: center;
   }
 
-  .select-wrapper-box {
-    flex: 1;
-    min-width: 130px;
+  /* --- Compare Bar --- */
+  .floating-compare-bar {
+    width: 94%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.6rem 1rem;
+  }
+
+  /* --- Section headers --- */
+  .section-h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
   }
 }
 
+/* ==========================================================================
+   MOBILE — max-width: 640px
+   ========================================================================== */
 @media (max-width: 640px) {
+
+  /* --- Container padding --- */
   .container {
-    padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
+  /* --- Hero --- */
   .hero-main-title {
-    font-size: 1.85rem;
+    font-size: clamp(1.85rem, 8vw, 2.6rem);
+    margin-bottom: 1rem;
+    line-height: 1.1;
   }
 
-  .hero-subtitle {
-    font-size: 0.95rem;
+  .hero-editorial-desc {
+    font-size: 0.88rem;
   }
 
+  .hero-exhibition-stage {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-telemetry-hud-card {
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .telemetry-num {
+    font-size: 1.45rem;
+  }
+
+  .telemetry-label {
+    font-size: 0.68rem;
+  }
+
+  .telemetry-sub {
+    font-size: 0.65rem;
+  }
+
+  /* Each telemetry item: 2x2 grid, remove right border from 2nd col */
+  .telemetry-hud-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .telemetry-hud-item:nth-child(3) {
+    border-right: 1px solid var(--border-default);
+  }
+
+  .telemetry-hud-item:nth-child(4) {
+    border-right: none;
+  }
+
+  [data-theme='light'] .telemetry-hud-item:nth-child(3) {
+    border-right-color: #e2e8f0;
+  }
+
+  /* --- Controls --- */
+  .controls-card {
+    padding: 1rem;
+  }
+
+  .search-box-unified {
+    height: 42px;
+    font-size: 0.85rem;
+  }
+
+  .chip-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  .select-wrapper-box {
+    min-width: unset;
+    flex: 1 1 calc(50% - 0.25rem);
+  }
+
+  .native-select {
+    height: 40px;
+    font-size: 0.82rem;
+  }
+
+  /* --- Catalog Grid: single column --- */
   .catalog-grid {
     grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  /* --- Car Card body tighter on mobile --- */
+  .card-body-content {
+    padding: 0.85rem 1rem 1rem;
+  }
+
+  .car-model-name {
+    font-size: 1.1rem;
+  }
+
+  .price-value-cognac {
+    font-size: 1.25rem;
+  }
+
+  .card-actions-grid {
+    grid-template-columns: 1fr auto auto;
+    gap: 0.4rem;
+  }
+
+  .btn-action-spec {
+    font-size: 0.78rem;
+    height: 36px;
+  }
+
+  .btn-action-compare,
+  .btn-chat-wa {
+    height: 36px;
+    width: 36px;
+  }
+
+  /* --- Simulator --- */
+  .simulator-section {
+    margin-top: 3rem;
+  }
+
+  .calc-input-card,
+  .calc-output-card {
+    padding: 1.25rem;
   }
 
   .tenor-button-group {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Rows 4 & 5 of tenor: one each */
+  .tenor-button-group button:nth-child(4),
+  .tenor-button-group button:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .suggested-rate-val {
+    font-size: 1.75rem;
+  }
+
+  .market-scale-legend {
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  .market-scale-legend span {
+    display: flex;
+    align-items: center;
+  }
+
+  .market-scale-legend span::before {
+    content: '•';
+    margin-right: 0.35rem;
+    color: var(--accent-cognac);
+  }
+
+  /* --- Standards Section --- */
+  .standards-section {
+    margin-top: 3rem;
+  }
+
+  .standards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .standard-card {
+    padding: 1.25rem;
+  }
+
+  .standard-num {
+    font-size: 1.35rem;
+  }
+
+  /* --- Contact Section --- */
+  .contact-cta-card {
+    padding: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-cta-card h3 {
+    font-size: 1.15rem;
+  }
+
+  /* --- Footer --- */
+  .footer-area {
+    margin-top: 3rem;
+    padding: 2.5rem 0 2rem;
   }
 
   .footer-top-grid {
@@ -110,10 +492,147 @@
   .footer-credits-bar {
     flex-direction: column;
     text-align: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
   }
 
+  /* --- Modals --- */
+  .modal-layer {
+    padding: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .modal-dialog-box {
+    max-height: 96vh;
+    border-radius: var(--r-md) var(--r-md) 0 0;
+    transform: scale(1) translateY(24px);
+  }
+
+  .modal-layer.active .modal-dialog-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-visual-side {
+    height: 180px;
+  }
+
+  .modal-info-side {
+    padding: 1rem 1.1rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .modal-title-heading {
+    font-size: 1.2rem;
+  }
+
+  .modal-price-figure {
+    font-size: 1.45rem;
+  }
+
+  .modal-spec-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .spec-cell {
+    padding: 0.5rem 0.65rem;
+  }
+
+  /* --- Comparison modal --- */
+  .compare-car-media {
+    height: 130px;
+  }
+
+  .comparison-table-view {
+    padding: 1rem;
+  }
+
+  .compare-title {
+    font-size: 1.2rem;
+  }
+
+  .compare-cols-wrap {
+    gap: 1rem;
+  }
+
+  /* --- Floating Compare Bar --- */
   .floating-compare-bar {
-    width: 90%;
-    justify-content: space-between;
+    width: 96%;
+    padding: 0.5rem 0.85rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .compare-bar-info {
+    font-size: 0.78rem;
+  }
+
+  .btn-launch-compare {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.85rem;
+  }
+
+  /* --- Toast container --- */
+  #toastContainer {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .toast-msg {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   EXTRA SMALL — max-width: 400px
+   ========================================================================== */
+@media (max-width: 400px) {
+
+  .hero-main-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-telemetry-hud-card {
+    grid-template-columns: 1fr 1fr;
+    padding: 0.85rem 1rem;
+  }
+
+  .capsule-nav {
+    padding: 0.35rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .capsule-brand {
+    font-size: 0.85rem;
+  }
+
+  .capsule-btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .tenor-button-group {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+  }
+
+  .tenor-choice-btn {
+    font-size: 0.72rem;
+    padding: 0.5rem 0;
+  }
+
+  .select-wrapper-box {
+    flex: 1 1 100%;
+  }
+
+  .modal-spec-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-scale-legend {
+    font-size: 0.68rem;
   }
 }
